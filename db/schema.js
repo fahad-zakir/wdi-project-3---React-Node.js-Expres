@@ -19,51 +19,43 @@ const GiftSchema = new Schema({
     }
 }, {
         timestamps: {}
-    }
-)
+    })
 
-const WishlistSchema  = new Schema({
+const GiftSchema = new Schema({
     giftName: {
         type: String,
         required: [true, 'Gift name is required!']
     },
-    giftList: [GiftSchema]
+    infoList: [InfoSchema]
 }, {
         timestamps: {}
-})
+    })
 
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: [ture, 'First name is required!']
+        required: [true, 'First name is required!']
     },
     email: {
         type: String
     },
     firstName: {
         type: String,
-        required: [ture, 'First name is required!']
+        required: [true, 'First name is required!']
     },
     lastName: {
         type: String,
         required: [true, 'Last name is required!']
     },
-    wishlists: [WishlistSchema]
+    gifts: [GiftsSchema]
 }, {
-    timestamps: {},
-    usePushEach: true
-})
+        timestamps: {},
+        usePushEach: true
+    })
 
 module.exports = {
-    WishlistsSchema,
     UserSchema,
-    GiftSchea
+    GiftSchema,
+    InfoSchema
 }
 
-const UserModel = mongoose.model('User', UserSchema)
-const IdeaModel = mongoose.model('Idea', IdeaSchema)
-
-module.exports = {
-    User: UserModel,
-    Idea: IdeaModel
-}

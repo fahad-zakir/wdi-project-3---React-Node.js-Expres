@@ -1,6 +1,6 @@
 require('dotenv').config()
 const User = require('../db/models/User')
-const Game = require('../db/models/Game')
+const Gift = require('../db/models/Gift')
 const Info = require('../db/models/Info')
 
 const mongoose = require('mongoose')
@@ -31,12 +31,11 @@ User.remove({})
             email: 'fahadzakir81@gmail.com',
             firstName: 'Fahad',
             lastName: 'Zakir',
-            photoUrl: 'https://i.imgur.com/0yDZcCV.jpg'
         })
 
-        const streetFighter = new Game({
+        const streetFighter = new Gift({
             title: 'Street Fighter II',
-            gameLink: 'http://emulator.online/snes/street-fighter-2-turbo/'
+            GiftLink: 'http://emulator.online/snes/street-fighter-2-turbo/'
         })
         const streetFighterInfo = new Info({
             title: 'Street Fighter II',
@@ -46,9 +45,9 @@ User.remove({})
         })
         streetFighter.infoList.push(streetFighterInfo)
 
-        const marioKart = new Game({
+        const marioKart = new Gift({
             title: 'Super Mario Kart',
-            gameLink: 'http://emulator.online/snes/super-mario-kart/'
+            GiftLink: 'http://emulator.online/snes/super-mario-kart/'
         })
         const marioKartInfo = new Info({
             title: 'Super Mario Kart',
@@ -58,7 +57,7 @@ User.remove({})
         })
         marioKart.infoList.push(marioKartInfo)
 
-        fahadZakir.games.push(streetFighter, marioKart)
+        fahadZakir.Gifts.push(streetFighter, marioKart)
 
         return fahadZakir.save()
     }).then(() => {
@@ -70,17 +69,17 @@ User.remove({})
             photoUrl: 'https://i.imgur.com/zedHEOI.png'
         })
     }).then((musa) => {
-        const streetsOfRage = new Game({
+        const streetsOfRage = new Gift({
             title: 'Streets of Rage',
-            gameLink: 'http://emulator.online/genesis/streets-of-rage/'
+            GiftLink: 'http://emulator.online/genesis/streets-of-rage/'
         })
 
-        const starFox = new Game({
+        const starFox = new Gift({
             title: 'Star Fox',
-            gameLink: 'http://emulator.online/snes/star-fox/'
+            GiftLink: 'http://emulator.online/snes/star-fox/'
         })
 
-        musa.games.push(streetsOfRage, starFox)
+        musa.gifts.push(streetsOfRage, starFox)
 
         return musa.save()
     }).catch((error) => {

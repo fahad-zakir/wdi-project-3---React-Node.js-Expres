@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+
 import styled from 'styled-components'
+
+import Home from './components/Home'
 import User from './components/User'
 import Gift from './components/Gift'
 import GiftInfo from './components/GiftInfo'
@@ -12,8 +15,11 @@ class App extends Component {
     return (
       <Router>
           <Switch>
-            <Route path="/" component={User}/>
-            <Route path="*" render={
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={User}/>
+            <Route exact path="/" component={Gift}/>
+            <Route exact path="/" component={GiftInfo}/>
+            <Route exact path="*" render={
               () => (<h4>Not found page!</h4>)
             }/>
           </Switch>

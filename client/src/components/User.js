@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, NavLink } from 'react-router-dom'
 import Gift from './Gift'
-import GiftInfo from '.GiftInfo'
+import GiftInfo from './GiftInfo'
 
 class User extends Component {
     render() {

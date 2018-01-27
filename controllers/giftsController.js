@@ -13,11 +13,11 @@ router.get('/', (request, response) => {
 
     User.findById(userId)
         .then((user) => {
-            response.render('games/index', {
+            response.send('gifts/index', {
                 userFullName: `${user.firstName} ${user.lastName}`,
                 userId: user._id,
-                games: user.games,
-                pageTitle: 'Games'
+                gifts: user.games,
+                pageTitle: 'Gifts'
             })
         })
         .catch((error) => {

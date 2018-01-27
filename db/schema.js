@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 mongoose.Promise = global.Promise
 
-const GiftSchema = new Schema({
+const InfoSchema = new Schema({
 
     giftName: {
         type: String,
@@ -47,7 +47,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Last name is required!']
     },
-    gifts: [GiftsSchema]
+    gift: [GiftSchema]
 }, {
         timestamps: {},
         usePushEach: true

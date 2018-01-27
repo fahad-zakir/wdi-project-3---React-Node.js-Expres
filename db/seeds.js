@@ -7,9 +7,7 @@ const mongoose = require('mongoose')
 
 
 // connect to database
-mongoose.connect(process.env.MONGODB_URI, {
-    useMongoClient: true
-})
+mongoose.connect('mongodb://localhost/project-3')
 
 mongoose.connection.once('open', () => {
     console.log(`Mongoose has connected to MongoDB`)
@@ -33,31 +31,27 @@ User.remove({})
             lastName: 'Zakir',
         })
 
-        const streetFighter = new Gift({
-            title: 'Street Fighter II',
-            GiftLink: 'http://emulator.online/snes/street-fighter-2-turbo/'
+        const nintendoSwitch = new Gift({
+            giftName: 'Nintendo Switch'
         })
-        const streetFighterInfo = new Info({
-            title: 'Street Fighter II',
-            genre: 'Fighting',
-            yearReleased: 1991,
-            system: 'SNES'
+        const nintendoSwitchInfo = new Info({
+            giftName: 'Nintendo Switch',
+            for: 'Dawud',
+            price: 300
         })
-        streetFighter.infoList.push(streetFighterInfo)
+        nintendoSwitch.infoList.push(nintendoSwitchInfo)
 
-        const marioKart = new Gift({
-            title: 'Super Mario Kart',
-            GiftLink: 'http://emulator.online/snes/super-mario-kart/'
+        const iphoneX = new Gift({
+            giftName: 'Iphone X'
         })
-        const marioKartInfo = new Info({
-            title: 'Super Mario Kart',
-            genre: 'Racing',
-            yearReleased: 1991,
-            system: 'SNES'
+        const iphoneXInfo = new Info({
+            giftName: 'Iphone X',
+            for: 'Sarah',
+            price: 1000
         })
-        marioKart.infoList.push(marioKartInfo)
+        iphoneX.infoList.push(iphoneXInfo)
 
-        fahadZakir.Gifts.push(streetFighter, marioKart)
+        fahadZakir.gifts.push(nintendoSwitch, iphoneX)
 
         return fahadZakir.save()
     }).then(() => {
@@ -65,21 +59,18 @@ User.remove({})
             username: 'musa10',
             email: 'abumusa1981@hotmail.com',
             firstName: 'Musa',
-            lastName: 'Zakir',
-            photoUrl: 'https://i.imgur.com/zedHEOI.png'
+            lastName: 'Zakir'
         })
     }).then((musa) => {
-        const streetsOfRage = new Gift({
-            title: 'Streets of Rage',
-            GiftLink: 'http://emulator.online/genesis/streets-of-rage/'
+        const samsungHd = new Gift({
+            title: 'Samasung HD'
         })
 
-        const starFox = new Gift({
-            title: 'Star Fox',
-            GiftLink: 'http://emulator.online/snes/star-fox/'
+        const macbookPro = new Gift({
+            title: 'Macbook Pro'
         })
 
-        musa.gifts.push(streetsOfRage, starFox)
+        musa.gifts.push(samsungHd, macbookPro)
 
         return musa.save()
     }).catch((error) => {

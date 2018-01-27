@@ -7,15 +7,15 @@ const InfoSchema = new Schema({
 
     giftName: {
         type: String,
-        required: [true, 'Gift title is required!']
+        // required: [true, 'Gift title is required!']
     },
     for: {
         type: String,
-        required: [true, 'For is required']
+        // required: [true, 'For is required']
     },
     price: {
         type: Number,
-        required: [true, 'Price is required!']
+        // required: [true, 'Price is required!']
     }
 }, {
         timestamps: {}
@@ -24,7 +24,7 @@ const InfoSchema = new Schema({
 const GiftSchema = new Schema({
     giftName: {
         type: String,
-        required: [true, 'Gift name is required!']
+        // required: [true, 'Gift name is required!']
     },
     infoList: [InfoSchema]
 }, {
@@ -34,20 +34,20 @@ const GiftSchema = new Schema({
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: [true, 'First name is required!']
+        // required: [true, 'First name is required!']
     },
     email: {
         type: String
     },
     firstName: {
         type: String,
-        required: [true, 'First name is required!']
+        // required: [true, 'First name is required!']
     },
     lastName: {
         type: String,
-        required: [true, 'Last name is required!']
+        // required: [true, 'Last name is required!']
     },
-    gift: [GiftSchema]
+    gifts: [GiftSchema]
 }, {
         timestamps: {},
         usePushEach: true

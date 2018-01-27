@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import Users from './containers/Users/Users'
-import Gifts from './containers/Gifts/Gifts'
-import GiftsInfo from './containers/GiftsInfo/GiftsInfo'
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import styled from 'styled-components'
+import User from './components/User'
+import Gift from './components/Gift'
+import GiftInfo from './components/GiftInfo'
 
 import './App.css'
 
@@ -16,7 +12,7 @@ class App extends Component {
     return (
       <Router>
           <Switch>
-            <Route path="/" component={Users}/>
+            <Route path="/" component={User}/>
             <Route path="*" render={
               () => (<h4>Not found page!</h4>)
             }/>

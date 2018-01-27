@@ -41,10 +41,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Controllers
-// const userController = require('./routes/userController.js')
-// app.use('/api/users', userController)
 
+const user = require('./controllers/userController')
+app.use('/api/users', user)
+// ./controllers/users
+const { User } = require('./db/schema')
+const router = express.Router()
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
@@ -63,4 +65,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = app

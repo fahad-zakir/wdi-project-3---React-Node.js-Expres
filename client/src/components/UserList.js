@@ -38,13 +38,22 @@ flex-direction:column;
 flex-wrap:wrap;
 justify-content:center;
 h1 {
-  color:goldenrod;
-}
+    color:Black bold;
+    font-size: 50px;
+    display:flex;
+    justify-content: center;
+}  
 .NavButtons {
-display:flex;
-flex-direction:column;
+display:block;
   a{
-  color:red;
-  margin:2px 0px 0px 5px;
+  text-decoration: none;
+    color: black;
+    font-size: 20px;
+    padding: 30px;
+    z-index: auto;
+    &:hover {
+    text-shadow: none;
+    text-shadow:2px 2px 2px silver;
+  
 }}
 `

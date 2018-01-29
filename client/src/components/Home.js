@@ -49,7 +49,7 @@ const Container = styled.div`
     text-decoration: none;
     color: white;
     font-size: 30px;
-    // z-index: auto;
+    z-index: auto;
     &:hover {
     text-shadow: none;
     text-shadow:2px 2px 2px #000000;

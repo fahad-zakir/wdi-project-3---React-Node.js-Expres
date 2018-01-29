@@ -76,6 +76,14 @@ class UserEditDelete extends Component {
                                     type="text"
                                     value={this.state.user.lastName} />
                             </div>
+                            <div>
+                                <input
+                                    onChange={this.handleChange}
+                                    name="email"
+                                    placeholder="email"
+                                    type="text"
+                                    value={this.state.user.email} />
+                            </div>
                             <button className="button" type="submit">
                                 Submit
                             </button>

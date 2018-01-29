@@ -1,8 +1,9 @@
 # WDI-Project-03
 # Gifts-Wishlists- 2018
 
-https://hidden-taiga-23732.herokuapp.com/users
+https://thawing-depths-48074.herokuapp.com/
 
+https://github.com/fahad-zakir/wdi-project-3
 
 ## Project Description
 Don't forget those gifts you wanted for your loved ones with this app.  Make a list of gifts for anyone.  Just create a username and start making your list!

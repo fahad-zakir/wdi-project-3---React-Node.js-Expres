@@ -24,7 +24,9 @@ class UserEditDelete extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.updateUser(this.state.user)
-        this.setState({ user: this.state.user, redirect: true })
+        this.updateCurrentState();
+        this.props.UserDataBase();
+        this.setState({redirect: true })
     }
 
     handleDelete = () => {

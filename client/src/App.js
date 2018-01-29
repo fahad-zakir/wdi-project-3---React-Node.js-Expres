@@ -58,7 +58,7 @@ class App extends Component {
     const DataOfUsers = () => (<UserList MyUsers={this.state.users} />)
 
     const makeNewUser = () => (<NewUser createUser={this.createUser} users={this.state.users} />)
-    const editUser = (props) => (<UserEditDelete updateUser={this.updateUser} deleteUser={this.deleteUser} users={this.state.users} {...props} />)
+    const editUser = (props) => (<UserEditDelete updateUser={this.updateUser} UserDataBase={this.userDatabase}  deleteUser={this.deleteUser} users={this.state.users} {...props} />)
 
 
 

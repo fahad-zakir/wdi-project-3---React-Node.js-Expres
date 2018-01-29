@@ -31,8 +31,10 @@ class Home extends Component {
 export default Home
 
 
-
+//background from codepen. User Taylor Vowell
 const Container = styled.div`
+    display: flex;
+    justify-content: center;
     width:100vw;
     height:100vh;
     background: rgb(105, 155, 200);
@@ -46,15 +48,13 @@ const Container = styled.div`
     a{
     text-decoration: none;
     color: white;
-    text-shadow:4px 4px 8px #000000;
-    z-index: auto;
+    font-size: 30px;
+    // z-index: auto;
     &:hover {
-    color: #7e7e7e;
     text-shadow: none;
     text-shadow:2px 2px 2px #000000;
     }
     }
 `
-//background from codepen. User Taylor Vowell
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 
 
 class Home extends Component {
@@ -13,7 +14,7 @@ class Home extends Component {
                     alt="gift" />
                 <h1>Gifts Wishlist</h1>
                 <div>
-                    <Link to="/user">User</Link>
+                    <Link to="/users">Users</Link>
                 </div>
                 <div>
                     <Link to="/gift">Gift</Link>

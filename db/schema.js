@@ -32,13 +32,6 @@ const GiftSchema = new Schema({
     })
 
 const UserSchema = new Schema({
-    username: {
-        type: String,
-        // required: [true, 'First name is required!']
-    },
-    email: {
-        type: String
-    },
     firstName: {
         type: String,
         // required: [true, 'First name is required!']
@@ -46,6 +39,9 @@ const UserSchema = new Schema({
     lastName: {
         type: String,
         // required: [true, 'Last name is required!']
+    },
+    email: {
+        type: String
     },
     gifts: [GiftSchema]
 }, {

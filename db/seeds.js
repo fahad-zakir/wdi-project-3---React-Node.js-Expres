@@ -25,10 +25,9 @@ mongoose.connection.on('error', (error) => {
 User.remove({})
     .then(() => {
         const fahadZakir = new User({
-            username: 'fahad81',
-            email: 'fahadzakir81@gmail.com',
             firstName: 'Fahad',
             lastName: 'Zakir',
+            email: 'fahadzakir81@gmail.com'
         })
 
         const nintendoSwitch = new Gift({
@@ -56,10 +55,9 @@ User.remove({})
         return fahadZakir.save()
     }).then(() => {
         return User.create({
-            username: 'musa10',
-            email: 'abumusa1981@hotmail.com',
             firstName: 'Musa',
-            lastName: 'Zakir'
+            lastName: 'Zakir',
+            email: 'abumusa1981@hotmail.com'
         })
     }).then((musa) => {
         const samsungHd = new Gift({

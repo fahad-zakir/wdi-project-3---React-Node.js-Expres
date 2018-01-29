@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom'
 import Users from './Users'
 
 
+
+
 class UserList extends Component {
 
     render() {
         const userList = this.props.MyUsers.map((user, index) => {
-            return (<Users
+            return (
+                <Users
                 key={index}
                 firstName={user.firstName}
                 lastName={user.lastName}

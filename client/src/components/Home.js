@@ -55,7 +55,7 @@ const Container = styled.div`
     a{
     text-decoration: none;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
     z-index: auto;
     &:hover {
     text-shadow: none;

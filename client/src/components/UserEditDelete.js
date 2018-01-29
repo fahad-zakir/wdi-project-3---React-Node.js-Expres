@@ -90,6 +90,7 @@ class UserEditDelete extends Component {
                                 Submit
                             </button>
                             <button onClick={this.handleDelete}>Delete</button>
+                            <a href="/gift'new">New Gift</a>
                             <a href="/users">Back To Users</a>
                         </form>
                     </div>

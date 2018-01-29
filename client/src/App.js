@@ -53,12 +53,27 @@ class App extends Component {
     this.userDatabase()
   }
 
+  createGift = async (user) => {
+    // send the user to the database
+    const response = await axios.post(`/api/users`, gift)
+
+    // grab the new user we just created in the database
+    const newGift = response.data
+
+    // put that new user into our list of users on the `state`
+    const gifts = [...this.state.gifts]
+    users.push(newGift)
+    this.setState({ gifts })
+  }
+
   render() {
     ////the function to grab all the users
     const DataOfUsers = () => (<UserList MyUsers={this.state.users} />)
 
     const makeNewUser = () => (<NewUser createUser={this.createUser} users={this.state.users} />)
     const editUser = (props) => (<UserEditDelete updateUser={this.updateUser} UserDataBase={this.userDatabase}  deleteUser={this.deleteUser} users={this.state.users} {...props} />)
+
+    const makeNewGift = () => (<NewGift createGift={this.newGift} gifts={this.state.gifts} />)
 
 
 
@@ -71,6 +86,7 @@ class App extends Component {
           <Route exact path="/user" component={User} />
           <Route exact path="/user/:userId" component={editUser} />
           <Route exact path="user/userId/delete" component={editUser} />
+          <Route exact path="/new-gift" component={makeNewGift} />
           <Route exact path="*" render={() => (<h4>Page not found!</h4>)} />
         </Switch>
       </Router>

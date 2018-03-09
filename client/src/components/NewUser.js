@@ -15,7 +15,8 @@ class NewUser extends Component {
     handleChange = (event) => {
         //after user fill's out the form, the information needs to be stored in a variable
         const attribute = event.target.name
-        let val = event.target.value
+        let val = event.target.value  
+        // what your typing for inst. name
         // update the new information
         // and add it to
         const newUser = { ...this.state.newUser }
@@ -84,7 +85,33 @@ justify-content: center;
   box-sizing: border-box;
   pading: 40px;
   width: 100%;
-  max-width: 900px;
+}
+  h2 {
+        display: flex;
+        justify-content: center;
+        font-family: 'Special Elite', cursive, bold;
+        padding-top: 50px;
+        text-align: center;
+    }
+form {
+       border: 5px solid rgba(0,0,0, 0.3);
+
+      display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0px 30px;
+  margin-bottom: 60px;
+  background-color: #D3D3D3;
+  width: 250px;
+  min-width: 200px;
+  height: 320px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.25s ease;
 }
  .button {
   border: 1px solid black;

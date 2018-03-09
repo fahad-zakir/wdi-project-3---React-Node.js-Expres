@@ -4,13 +4,18 @@ import axios from 'axios'
 import Home from './components/Home'
 import UserList from './components/UserList'
 import NewUser from './components/NewUser'
+import NewGift from './components/NewGift'
 import User from './components/User'
 import UserEditDelete from './components/UserEditDelete'
+import Gift from './components/Gift'
+import GiftList from './components/GiftList'
 
 class App extends Component {
 
   state = {
-    users: []
+    users: [],
+    gifts: [],
+    userID: []
   }
 
   userDatabase = () => {
@@ -19,6 +24,15 @@ class App extends Component {
       .then(response => {
         const users = response.data
         this.setState({ users: users })
+      })
+  }
+
+  giftDatabase = () => {
+    axios
+      .get('/api/gifts')
+      .then(response => {
+        const gifts = response.data
+        this.setState({ gifts: gifts})
       })
   }
 
@@ -51,18 +65,19 @@ class App extends Component {
 
   componentWillMount() {
     this.userDatabase()
+    this.giftDatabase()
   }
 
-  createGift = async (user) => {
+  createGift = async (gift) => {
     // send the user to the database
-    const response = await axios.post(`/api/users`, gift)
+    const response = await axios.post(`/api/gifts`, gift)
 
     // grab the new user we just created in the database
     const newGift = response.data
 
     // put that new user into our list of users on the `state`
     const gifts = [...this.state.gifts]
-    users.push(newGift)
+    gifts.push(newGift)
     this.setState({ gifts })
   }
 
@@ -73,7 +88,11 @@ class App extends Component {
     const makeNewUser = () => (<NewUser createUser={this.createUser} users={this.state.users} />)
     const editUser = (props) => (<UserEditDelete updateUser={this.updateUser} UserDataBase={this.userDatabase}  deleteUser={this.deleteUser} users={this.state.users} {...props} />)
 
-    const makeNewGift = () => (<NewGift createGift={this.newGift} gifts={this.state.gifts} />)
+    // const DataOfGifts = () => (<GiftList MyGifts={this.state.gifts} />)
+
+    const AllGifts = () => (<GiftList MyGifts={this.state.gifts} userID={this.state.userID} />)
+
+    const makeNewGift = () => (<NewGift createGift={this.createGift} gifts={this.state.gifts} />)
 
 
 
@@ -85,8 +104,9 @@ class App extends Component {
           <Route exact path="/new" component={makeNewUser} />
           <Route exact path="/user" component={User} />
           <Route exact path="/user/:userId" component={editUser} />
-          <Route exact path="user/userId/delete" component={editUser} />
-          <Route exact path="/new-gift" component={makeNewGift} />
+          <Route exact path="/user/:userId/gifts" component={AllGifts} />
+          <Route exact path="/user/:userId/gift/:giftId" component={Gift} />
+          <Route exact path="/user/:userId/new-gift" component={makeNewGift} />
           <Route exact path="*" render={() => (<h4>Page not found!</h4>)} />
         </Switch>
       </Router>

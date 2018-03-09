@@ -1,48 +1,45 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Users from './Users'
+import Gifts from './Gifts'
 
 
 
 
-class UserList extends Component {
+class GiftList extends Component {
 
     render() {
-        const userList = this.props.MyUsers.map((user, index) => {
+        const giftList = this.props.MyGifts.map((gift, index) => {
             return (
-                <Users
-                key={index}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                email={user.email}
-                photo={user.photo}
-                id={user._id} />)
-        
+                <Gifts
+                    key={index}
+                    giftName={gift.giftName}
+                    id={gift._id} />)
+
         })
 
         return (
-            <UserIdContainer >
+            <GiftContainer >
                 <div className="NavButtons">
                     <Link to="/">Home</Link>
-                    <Link to="/new">Create User</Link>
-                    <h1>Users List</h1>
+                    <Link to="./new-gift">Create Gift</Link>
+                    <h1>Gifts List</h1>
                 </div>
                 <div>
-                    <div>{userList}</div>
+                    <div>{giftList}</div>
                 </div>
-            </UserIdContainer>
+            </GiftContainer>
         )
     }
 }
-export default UserList
+export default GiftList
 
 const FormContainer = styled.div`
 
 
 `
 
-const UserIdContainer = styled.div`
+const GiftContainer = styled.div`
 display:flex;
 flex-direction:column;
 flex-wrap:wrap;

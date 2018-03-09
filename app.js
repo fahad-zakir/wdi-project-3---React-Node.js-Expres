@@ -44,6 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const user = require('./controllers/userController')
 app.use('/api/users', user)
+const gift = require('./controllers/giftController')
+app.use('/api/gifts', gift)
 // ./controllers/users
 const { User } = require('./db/schema')
 const router = express.Router()

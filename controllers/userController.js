@@ -8,13 +8,19 @@ const User = require('../db/models/User')
 
 router.get('/', (req, res) => {
     User.find({}).then(users => { //Find all of the users from the database
-        res.json(users)  //send JSON back for all users
+        //send JSON back for all users
+        res.json(users)
         //.Catch is used for any errors that might appear
     }).catch(err => {
         console.log(err)
         res.json("caught error")
     })
 })
+
+
+
+
+
 //something that follows the colons up to the next forward slash will be a req parameter
 router.get('/:userId', (req, res) => {
     const userId = req.params.userId

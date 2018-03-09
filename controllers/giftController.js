@@ -3,13 +3,14 @@ const router = express.Router({ mergeParams: true })
 const Gift = require('../db/models/Gift')
 
 router.get('/', async (req, res) => {
-    try {
-        const gifts = await Gift.find({})
-        rest.json(gifts)
-    }   catch (error) {
-        console.log(error)
-        res.sendStatus(500)
-    }
+    Gift.find({}).then(gifts => { //Find all of the users from the database
+        //send JSON back for all users
+        res.json(gifts)
+        //.Catch is used for any errors that might appear
+    }).catch(err => {
+        console.log(err)
+        res.json("caught error")
+    })
 })
 
 //Get a single gift
@@ -18,7 +19,7 @@ router.get('/:giftId', async (req, res) => {
         console.log(req.params.giftId)
         const gift = await Gift.findById(req.params.giftId)
         // send json of gift
-        req.json(gift)
+        res.json(gift)
     } catch (err) {
         res.send(err)
     }
@@ -26,7 +27,7 @@ router.get('/:giftId', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const newGift = await Gift.create({})
+        const newGift = await Gift.create(req.body)
         res.json(newGift)
     }   catch (error) {
         console.log(error)

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 
 
-class Gift extends Component {
+class NewGift extends Component {
 
     state = {
         newGift: [],
@@ -29,38 +29,22 @@ class Gift extends Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/gifts" />
+            return <Redirect to="./gifts" />
         }
         return (
             <NewUserContainer>
                 <div>
-                    <h2>Create New User</h2>
+                    <h2>Add New Gift</h2>
                 </div>
                 <form onSubmit={this.handleSubmit}>
 
                     <div>
                         <input
                             onChange={this.handleChange}
-                            name="firstName"
-                            placeholder="first name"
+                            name="giftName"
+                            placeholder="gift name"
                             type="text" required
-                            value={this.state.newUser.firstName} />
-                    </div>
-                    <div>
-                        <input
-                            onChange={this.handleChange}
-                            name="lastName"
-                            placeholder="last name"
-                            type="text"
-                            value={this.state.newUser.lastName} />
-                    </div>
-                    <div>
-                        <input
-                            onChange={this.handleChange}
-                            name="email"
-                            placeholder="email"
-                            type="text"
-                            value={this.state.newUser.email} />
+                            value={this.state.newGift.giftName} />
                     </div>
                     <button className="button" type="submit">
                         Submit
@@ -71,7 +55,7 @@ class Gift extends Component {
     }
 }
 
-export default NewUser
+export default NewGift
 //background from Taylor Vowell codpen
 const NewUserContainer = styled.div`
 width:100vw;

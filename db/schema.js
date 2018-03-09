@@ -26,6 +26,9 @@ const GiftSchema = new Schema({
         type: String,
         // required: [true, 'Gift name is required!']
     },
+    userID: {
+        type:String
+    },
     infoList: [InfoSchema]
 }, {
         timestamps: {}

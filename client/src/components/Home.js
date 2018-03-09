@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
+import UserList from 'styled-components'
 
 
 class Home extends Component {

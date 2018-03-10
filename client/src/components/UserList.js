@@ -23,7 +23,7 @@ class UserList extends Component {
         
 
         return (
-            <UserIdContainer >
+            <UserIdContainer>
                 <div className="NavButtons">
                     <Link to="/">Home</Link>
                     <Link to="/new">Create User</Link>
@@ -44,8 +44,7 @@ export default UserList
 const UserIdContainer = styled.div`
 display:flex;
 flex-direction:column;
-flex-wrap:wrap;
-justify-content:center;
+height: 100vh;
  background: rgb(105, 155, 200);
     background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
     background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));
@@ -76,5 +75,6 @@ display:block;
     &:hover {
     text-shadow: none;
     text-shadow:2px 2px 2px silver;
-}}
+}
+}
 `

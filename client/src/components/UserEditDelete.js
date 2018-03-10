@@ -93,7 +93,9 @@ class UserEditDelete extends Component {
                                 Submit
                             </button>
                             <button onClick={this.handleDelete}>Delete</button>
+                            <div className="gift-link">
                             <Link to={`/user/${this.state.userID}/new-gift`}>New Gift</Link>
+                            </div>
                             <a href="/users">Back To Users</a>
                         </form>
                             </FormContainer>
@@ -117,17 +119,17 @@ const Container = styled.div`
     background: -o-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -o-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
     background: -ms-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -ms-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
     background: linear-gradient(135deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), linear-gradient(to right, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-
-  justify-content:
-  align-items: center;
-  margin: 10px;
-  padding: 20px;
-  color: white;
+    justify-content:
+    margin: 10px;
+    padding: 20px;
+    color: white;
     font-size: 2vh;
-    text-shadow: 1px 1px 0px black;` 
+    text-shadow: 1px 1px 0px black;
+    `
     
 
 const FormContainer = styled.div`
+margin-top: 50px;
   font-family: 'Lato', sans-serif;
   font-family: 'Playfair Display', serif;
   font-weight: 300;

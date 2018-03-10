@@ -10,9 +10,10 @@ class Home extends Component {
         return (
             <Container>
             <div>
-                <img
+                <img 
                 src="http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
-                    alt="gift" />
+                        alt="gift" className="main-img" />
+                <div className="models-container">
                 <h1>Gifts Wishlist</h1>
                 <div>
                     <Link to="/users">Users</Link>
@@ -22,6 +23,7 @@ class Home extends Component {
                 </div>
                 <div>
                     <Link to="/giftInfo">Gift Info</Link>
+                </div>
                 </div>
             </div>
             </Container>

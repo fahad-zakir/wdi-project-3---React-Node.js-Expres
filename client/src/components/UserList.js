@@ -18,18 +18,20 @@ class UserList extends Component {
                 email={user.email}
                 photo={user.photo}
                 id={user._id} />)
-        
+                
         })
+        
 
         return (
             <UserIdContainer >
                 <div className="NavButtons">
                     <Link to="/">Home</Link>
                     <Link to="/new">Create User</Link>
-                    <h1>Users List</h1>
                 </div>
+                <h1 className="users-list">Users List</h1>
+
                 <div>
-                    <div>{userList}</div>
+                    <div className="user-info">{userList}</div>
                 </div>
             </UserIdContainer>
         )
@@ -37,16 +39,21 @@ class UserList extends Component {
 }
 export default UserList
 
-const FormContainer = styled.div`
 
-
-`
 
 const UserIdContainer = styled.div`
 display:flex;
 flex-direction:column;
 flex-wrap:wrap;
 justify-content:center;
+ background: rgb(105, 155, 200);
+    background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
+    background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));
+    background: -webkit - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
+    background: -o - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
+    background: -ms - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
+    background: radial - gradient(ellipse at top left, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#699bc8', endColorstr = '#b5c5d8', GradientType = 1);
 h1 {
     font-family: 'Special Elite', cursive, bold;
     padding-top: 50px;
@@ -69,6 +76,5 @@ display:block;
     &:hover {
     text-shadow: none;
     text-shadow:2px 2px 2px silver;
-  
 }}
 `

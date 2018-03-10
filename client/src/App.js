@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
+import './App.css';
 import Home from './components/Home'
 import UserList from './components/UserList'
 import NewUser from './components/NewUser'

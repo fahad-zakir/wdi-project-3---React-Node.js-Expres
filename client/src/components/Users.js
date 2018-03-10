@@ -12,7 +12,7 @@ class Users extends Component {
                 <div className="firstNameContainer">
                     <div>{this.props.firstName} {this.props.lastName}</div>
                     <div>{this.props.email}</div>
-                    <Link to={`/user/${this.props.id}`}>Update</Link>
+                    <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
                 </div>
             </div>
             </div>

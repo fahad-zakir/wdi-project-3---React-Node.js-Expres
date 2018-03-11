@@ -12,15 +12,15 @@ class UserList extends Component {
         const userList = this.props.MyUsers.map((user, index) => {
             return (
                 <Users
-                key={index}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                email={user.email}
-                photo={user.photo}
-                id={user._id} />)
-                
+                    key={index}
+                    firstName={user.firstName}
+                    lastName={user.lastName}
+                    email={user.email}
+                    photo={user.photo}
+                    id={user._id} />)
+
         })
-        
+
 
         return (
             <UserIdContainer>

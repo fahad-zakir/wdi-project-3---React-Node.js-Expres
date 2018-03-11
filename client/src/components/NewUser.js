@@ -15,7 +15,7 @@ class NewUser extends Component {
     handleChange = (event) => {
         //after user fill's out the form, the information needs to be stored in a variable
         const attribute = event.target.name
-        let val = event.target.value  
+        let val = event.target.value
         // what your typing for inst. name
         // update the new information
         // and add it to
@@ -39,36 +39,36 @@ class NewUser extends Component {
                 <div className="form">
                     <h2 className="user-h2">Create New User</h2>
 
-                <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
 
-                    <div>
-                        <input
-                            onChange={this.handleChange}
-                            name="firstName"
-                            placeholder="first name"
-                            type="text" required
-                            value={this.state.newUser.firstName} />
-                    </div>
-                    <div>
-                        <input
-                            onChange={this.handleChange}
-                            name="lastName"
-                            placeholder="last name"
-                            type="text"
-                            value={this.state.newUser.lastName} />
-                    </div>
-                    <div>
-                        <input
-                            onChange={this.handleChange}
-                            name="email"
-                            placeholder="email"
-                            type="text"
-                            value={this.state.newUser.email} />
-                    </div>
-                    <button className ="button" type="submit">
-                        Submit
+                        <div>
+                            <input
+                                onChange={this.handleChange}
+                                name="firstName"
+                                placeholder="first name"
+                                type="text" required
+                                value={this.state.newUser.firstName} />
+                        </div>
+                        <div>
+                            <input
+                                onChange={this.handleChange}
+                                name="lastName"
+                                placeholder="last name"
+                                type="text"
+                                value={this.state.newUser.lastName} />
+                        </div>
+                        <div>
+                            <input
+                                onChange={this.handleChange}
+                                name="email"
+                                placeholder="email"
+                                type="text"
+                                value={this.state.newUser.email} />
+                        </div>
+                        <button className="button" type="submit">
+                            Submit
           </button>
-                </form>
+                    </form>
                 </div>
             </NewUserContainer>
         )

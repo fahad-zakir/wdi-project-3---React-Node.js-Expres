@@ -22,7 +22,6 @@ body {
 .models-container {
   margin-left: 50px;
   margin-top: 50px;
-  
 }
 
 .users-list {
@@ -46,13 +45,10 @@ body {
 
 .gift-link {
   margin-top: 425px;
-
-
 }
 
 .gift-form {
   margin-top: 100px;
-
 }
 
 .new-gift {
@@ -62,4 +58,3 @@ body {
   padding-bottom: 40px;
   font-family: 'Special Elite', cursive, bold;
 }
-

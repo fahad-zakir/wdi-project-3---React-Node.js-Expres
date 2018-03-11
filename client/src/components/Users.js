@@ -8,13 +8,13 @@ class Users extends Component {
     render() {
         return (
             <UserIdContainer>
-            <div className="UserContainer">
-                <div className="firstNameContainer">
-                    <div className="first-name">{this.props.firstName} {this.props.lastName}</div>
-                    <div>{this.props.email}</div>
-                    <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
+                <div className="UserContainer">
+                    <div className="firstNameContainer">
+                        <div className="first-name">{this.props.firstName} {this.props.lastName}</div>
+                        <div>{this.props.email}</div>
+                        <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
+                    </div>
                 </div>
-            </div>
             </UserIdContainer>
         )
     }

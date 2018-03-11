@@ -17,8 +17,8 @@ width: 58px;
 height: 33px;
 `
 class User extends Component {
-    
-    state= {
+
+    state = {
         user: {
             firstName: "",
             lastName: "",

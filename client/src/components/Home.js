@@ -9,23 +9,23 @@ class Home extends Component {
     render() {
         return (
             <Container>
-            <div>
-                <img 
-                src="http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
+                <div>
+                    <img
+                        src="http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
                         alt="gift" className="main-img" />
-                <div className="models-container">
-                <h1>Gifts Wishlist</h1>
-                <div>
-                    <Link to="/users">Users</Link>
+                    <div className="models-container">
+                        <h1>Gifts Wishlist</h1>
+                        <div>
+                            <Link to="/users">Users</Link>
+                        </div>
+                        <div>
+                            <Link to="/gift">Gift</Link>
+                        </div>
+                        <div>
+                            <Link to="/giftInfo">Gift Info</Link>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <Link to="/gift">Gift</Link>
-                </div>
-                <div>
-                    <Link to="/giftInfo">Gift Info</Link>
-                </div>
-                </div>
-            </div>
             </Container>
         )
     }

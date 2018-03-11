@@ -29,7 +29,7 @@ class UserEditDelete extends Component {
         this.props.updateUser(this.state.user)
         this.updateCurrentState();
         this.props.UserDataBase();
-        this.setState({redirect: true })
+        this.setState({ redirect: true })
     }
 
     handleDelete = () => {
@@ -52,20 +52,20 @@ class UserEditDelete extends Component {
     }
 
     render() {
-        if (this.state.redirect === true){
+        if (this.state.redirect === true) {
             return <Redirect to="/users" />
         }
         return (
             this.state.isStateNotSet ? <div></div> :
-                
-                    
-                    <Container>
-                
-                            <h2>Update User</h2>
-                    
-                     <FormContainer>
+
+
+                <Container>
+
+                    <h2>Update User</h2>
+
+                    <FormContainer>
                         <form onSubmit={this.handleSubmit}>
-                            
+
                             <div>
                                 <input
                                     onChange={this.handleChange}
@@ -94,8 +94,8 @@ class UserEditDelete extends Component {
                                 Submit
                             </button>
                             <button className="button-2" onClick={this.handleDelete}>Delete</button>
-                            
-                                </form>
+
+                        </form>
 
                         <div className="link-div">
                             <div className="gift-link">
@@ -105,12 +105,12 @@ class UserEditDelete extends Component {
                                 <a href="/users">Back To Users</a>
                             </div>
                         </div>
-                            </FormContainer>
-                       
-                        </Container>
-                        
-                    
-                
+                    </FormContainer>
+
+                </Container>
+
+
+
         )
     }
 }
@@ -134,7 +134,7 @@ const Container = styled.div`
     font-size: 2vh;
     text-shadow: 1px 1px 0px black;
     `
-    
+
 
 const FormContainer = styled.div`
 margin-top: 50px;

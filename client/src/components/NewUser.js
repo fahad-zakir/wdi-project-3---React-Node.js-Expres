@@ -35,8 +35,10 @@ class NewUser extends Component {
         return (
             <NewUserContainer>
                 <div>
-                    <h2>Create New User</h2>
                 </div>
+                <div className="form">
+                    <h2 className="user-h2">Create New User</h2>
+
                 <form onSubmit={this.handleSubmit}>
 
                     <div>
@@ -67,6 +69,7 @@ class NewUser extends Component {
                         Submit
           </button>
                 </form>
+                </div>
             </NewUserContainer>
         )
     }
@@ -83,29 +86,20 @@ justify-content: center;
 -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  pading: 40px;
   width: 100%;
 }
-  h2 {
-        display: flex;
-        justify-content: center;
-        font-family: 'Special Elite', cursive, bold;
-        padding-top: 50px;
-        text-align: center;
-    }
-form {
-       border: 5px solid rgba(0,0,0, 0.3);
 
-      display: flex;
+form {
+  border: 5px solid rgba(0,0,0, 0.3);
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
-  margin: 0px 30px;
-  margin-bottom: 60px;
   background-color: #D3D3D3;
-  width: 250px;
+  width: 300px;
   min-width: 200px;
+  margin-top: 50px;
   height: 320px;
   font-weight: bold;
   color: black;

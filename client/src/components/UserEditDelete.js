@@ -151,6 +151,24 @@ margin-top: 50px;
     text-shadow:2px 2px 2px #000000;
     }
     }
+form {
+  border: 5px solid rgba(0,0,0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #D3D3D3;
+  width: 300px;
+  min-width: 200px;
+  margin-top: 50px;
+  height: 320px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.25s ease;
+}
 
 `
 

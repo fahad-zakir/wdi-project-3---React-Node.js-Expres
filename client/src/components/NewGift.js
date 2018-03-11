@@ -80,6 +80,7 @@ form {
   width: 300px;
   min-width: 200px;
   margin-top: 200px;
+  padding-right: 50px;
   height: 320px;
   font-weight: bold;
   color: black;

@@ -57,14 +57,15 @@ class UserEditDelete extends Component {
         }
         return (
             this.state.isStateNotSet ? <div></div> :
-                <div>
-                    <div>
+                
+                    
                     <Container>
-                        <div>
+                
                             <h2>Update User</h2>
-                        </div>
-                    <FormContainer>
+                    
+                     <FormContainer>
                         <form onSubmit={this.handleSubmit}>
+                            
                             <div>
                                 <input
                                     onChange={this.handleChange}
@@ -92,17 +93,24 @@ class UserEditDelete extends Component {
                             <button className="button" type="submit">
                                 Submit
                             </button>
-                            <button onClick={this.handleDelete}>Delete</button>
-                            <div className="gift-link">
-                            <Link to={`/user/${this.state.userID}/new-gift`}>New Gift</Link>
-                            </div>
-                            <a href="/users">Back To Users</a>
-                        </form>
-                            </FormContainer>
+                            <button className="button-2" onClick={this.handleDelete}>Delete</button>
+                            
+                                </form>
 
+                        <div className="link-div">
+                            <div className="gift-link">
+                                <Link to={`/user/${this.state.userID}/new-gift`}>New Gift</Link>
+                            </div>
+                            <div className="users-link">
+                                <a href="/users">Back To Users</a>
+                            </div>
+                        </div>
+                            </FormContainer>
+                       
                         </Container>
-                    </div>
-                </div>
+                        
+                    
+                
         )
     }
 }
@@ -153,6 +161,7 @@ margin-top: 50px;
     }
 form {
   border: 5px solid rgba(0,0,0, 0.3);
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -168,6 +177,28 @@ form {
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 0.25s ease;
+}
+ .button {
+  border: 1px solid black;
+  max-width: 250px;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  transition: all 0.25s ease;
+  background: #74942c;
+}
+ .button-2 {
+  border: 1px solid black;
+  max-width: 250px;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  transition: all 0.25s ease;
+  background: red;
 }
 
 `

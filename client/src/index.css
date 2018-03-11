@@ -50,8 +50,16 @@ body {
 
 }
 
-.users-link {
+.gift-form {
+  margin-top: 100px;
 
+}
 
-}  
+.new-gift {
+  position: absolute;
+  margin-top: 80px;
+  padding-left: 20px;
+  padding-bottom: 40px;
+  font-family: 'Special Elite', cursive, bold;
+}
 

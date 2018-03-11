@@ -34,11 +34,11 @@ class NewGift extends Component {
         return (
             <NewUserContainer>
                 <div>
-                    <h2>Add New Gift</h2>
+                    <h2 className="new-gift">Add New Gift</h2>
                 </div>
                 <form onSubmit={this.handleSubmit}>
 
-                    <div>
+                    <div className="gift-form">
                         <input
                             onChange={this.handleChange}
                             name="giftName"
@@ -68,7 +68,24 @@ justify-content: center;
   box-sizing: border-box;
   pading: 40px;
   width: 100%;
-  max-width: 900px;
+}
+form {
+  border: 5px solid rgba(0,0,0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #D3D3D3;
+  width: 300px;
+  min-width: 200px;
+  margin-top: 200px;
+  height: 320px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.25s ease;
 }
  .button {
   border: 1px solid black;

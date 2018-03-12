@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Gifts from './Gifts'
+import Users from './Users'
 
 
 
@@ -9,11 +10,14 @@ import Gifts from './Gifts'
 class GiftList extends Component {
 
     render() {
-        const giftList = this.props.MyGifts.map((gift, index) => {
+        const giftList = this.props.MyGifts.map((gift, user, index) => {
             return (
                 <Gifts
                     key={index}
+                    firstName={user.firstName}
+                    lastName={user.lastName}
                     giftName={gift.giftName}
+                    id={user.id}
                     id={gift._id} />)
 
         })
@@ -23,10 +27,10 @@ class GiftList extends Component {
                 <div className="NavButtons">
                     <Link to="/">Home</Link>
                     <Link to="./new-gift">Create Gift</Link>
-                    <h1>Gifts List</h1>
+                    <h1 className="users-list">Gifts List</h1>
                 </div>
                 <div>
-                    <div>{giftList}</div>
+                    <div className="user-info">{giftList}</div>
                 </div>
             </GiftContainer>
         )
@@ -42,9 +46,7 @@ const FormContainer = styled.div`
 const GiftContainer = styled.div`
 display:flex;
 flex-direction:column;
-flex-wrap:wrap;
-justify-content:center;
-height: 100vh;
+height: 500vh;
 background: rgb(105, 155, 200);
     background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
     background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));

@@ -46,6 +46,10 @@ const UserSchema = new Schema({
     email: {
         type: String
     },
+    photoUrl: {
+        type: String,
+        default: 'https://i.imgur.com/ul23PsQ.jpg'
+    },
     gifts: [GiftSchema]
 }, {
         timestamps: {},

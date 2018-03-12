@@ -65,6 +65,14 @@ class NewUser extends Component {
                                 type="text"
                                 value={this.state.newUser.email} />
                         </div>
+                        <div>
+                            <input
+                                onChange={this.handleChange}
+                                name="photo"
+                                placeholder="photo"
+                                type="text"
+                                value={this.state.newUser.photoUrl} />
+                        </div>
                         <button className="button" type="submit">
                             Submit
           </button>

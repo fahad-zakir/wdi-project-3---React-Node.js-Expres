@@ -10,7 +10,7 @@ class Gifts extends Component {
             <div>
                 <div className="UserContainer">
                     <div className="firstNameContainer">
-                        <div>{this.props.giftName}</div>
+                        <div className="gift-name">{this.props.giftName}</div>
                         <Link to={`./gift/${this.props.id}`}>Update</Link>
                     </div>
                 </div>

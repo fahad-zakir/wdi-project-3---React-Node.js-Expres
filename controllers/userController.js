@@ -17,10 +17,6 @@ router.get('/', (req, res) => {
     })
 })
 
-
-
-
-
 //something that follows the colons up to the next forward slash will be a req parameter
 router.get('/:userId', (req, res) => {
     const userId = req.params.userId
@@ -42,10 +38,9 @@ router.get('/:userId', (req, res) => {
 //     res.json({name: 'Fahad'})
 // })
 
-// router.get('/marco', (req, res) => {
-//     res.json({ name: 'marco' })
+// router.get('/kevin', (req, res) => {
+//     res.json({ name: 'kevin' })
 // })
-
 
 //To create a new user
 router.post('/', async (req, res) => {

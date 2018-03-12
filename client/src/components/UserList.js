@@ -4,8 +4,6 @@ import { Redirect, Link } from 'react-router-dom'
 import Users from './Users'
 
 
-
-
 class UserList extends Component {
 
     render() {
@@ -16,35 +14,33 @@ class UserList extends Component {
                     firstName={user.firstName}
                     lastName={user.lastName}
                     email={user.email}
-                    photo={user.photo}
+                    photoUrl={user.photoUrl}
                     id={user._id} />)
 
         })
 
+            return (
+                <UserIdContainer>
+                    <div className="NavButtons">
+                        <Link to="/">Home</Link>
+                        <Link to="/new">Create User</Link>
+                    </div>
+                    <h1 className="users-list">Users List</h1>
 
-        return (
-            <UserIdContainer>
-                <div className="NavButtons">
-                    <Link to="/">Home</Link>
-                    <Link to="/new">Create User</Link>
-                </div>
-                <h1 className="users-list">Users List</h1>
-
-                <div>
-                    <div className="user-info">{userList}</div>
-                </div>
-            </UserIdContainer>
+                    <div>
+                        <div className="user-info">{userList}</div>
+                    </div>
+                </UserIdContainer>
         )
     }
 }
 export default UserList
 
 
-
 const UserIdContainer = styled.div`
 display:flex;
 flex-direction:column;
-height: 100vh;
+height: 500vh;
  background: rgb(105, 155, 200);
     background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
     background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));
@@ -76,5 +72,5 @@ display:block;
     text-shadow: none;
     text-shadow:2px 2px 2px silver;
 }
-}
+
 `

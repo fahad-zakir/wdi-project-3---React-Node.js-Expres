@@ -27,7 +27,8 @@ User.remove({})
         const fahadZakir = new User({
             firstName: 'Fahad',
             lastName: 'Zakir',
-            email: 'fahadzakir81@gmail.com'
+            email: 'fahadzakir81@gmail.com',
+            photoUrl: 'https://i.imgur.com/0yDZcCV.jpg'
         })
 
         const nintendoSwitch = new Gift({
@@ -57,7 +58,8 @@ User.remove({})
         return User.create({
             firstName: 'Musa',
             lastName: 'Zakir',
-            email: 'abumusa1981@hotmail.com'
+            email: 'abumusa1981@hotmail.com',
+            photoUrl: 'https://i.imgur.com/zedHEOI.png'
         })
     }).then((musa) => {
         const samsungHd = new Gift({

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true })
+// This mergeParams is important! It means that you should be able to get route params from the full route
 const Gift = require('../db/models/Gift')
 
 router.get('/', async (req, res) => {
@@ -25,35 +26,38 @@ router.get('/:giftId', async (req, res) => {
     }
 })
 
+// Find a user, then create a new Gift, push it into the users existing gifts and then save the user
 router.post('/', async (req, res) => {
     try {
         const newGift = await Gift.create(req.body)
         res.json(newGift)
-    }   catch (error) {
+    } catch (error) {
         console.log(error)
         res.sendStatus(500)
     }
 })
 
+// Find a specific gift by then delete it
 router.delete('/:giftId', async (req, res) => {
     try {
         await GiftfindByIdAndRemove(req.params.giftId)
         res.sendStatus(200)
-    }   catch (error) {
+    } catch (error) {
         console.log(error)
         res.sendStatus(500)
     }
 })
 
+// Find a user, then search for a specific idea id, then update the idea based on the contents of req.body.idea 
 router.patch('/:giftId', async (req, res) => {
     try {
         const updatedGift =
-         await Gift.findByIdAndUpdate(req.params.giftId, req.body, {new: true})
-    console.log('FromGiftPatch:'+req.body)
-        res.json(updatedGift)
+            await Gift.findByIdAndUpdate(req.params.giftId, req.body, { new: true })
+            console.log('FromGiftPatch:' + req.body)
+            res.json(updatedGift)
     } catch (error) {
-      console.log(error)
-      res.sendStatus(500)
+        console.log(error)
+        res.sendStatus(500)
     }
 })
 

@@ -8,7 +8,7 @@ import NewUser from './components/NewUser'
 import NewGift from './components/NewGift'
 import User from './components/User'
 import UserEditDelete from './components/UserEditDelete'
-import Gift from './components/Gift'
+// import Gift from './components/Gift'
 import GiftList from './components/GiftList'
 
 class App extends Component {
@@ -88,7 +88,7 @@ class App extends Component {
 
     const makeNewUser = () => (<NewUser createUser={this.createUser} users={this.state.users} />)
     const editUser = (props) => (<UserEditDelete updateUser={this.updateUser} UserDataBase={this.userDatabase}  deleteUser={this.deleteUser} users={this.state.users} {...props} />)
-
+  
     // const DataOfGifts = () => (<GiftList MyGifts={this.state.gifts} />)
 
     const AllGifts = () => (<GiftList MyGifts={this.state.gifts} userID={this.state.userID} />)
@@ -106,7 +106,6 @@ class App extends Component {
           <Route exact path="/user" component={User} />
           <Route exact path="/user/:userId" component={editUser} />
           <Route exact path="/user/:userId/gifts" component={AllGifts} />
-          <Route exact path="/user/:userId/gift/:giftId" component={Gift} />
           <Route exact path="/user/:userId/new-gift" component={makeNewGift} />
           <Route exact path="*" render={() => (<h4>Page not found!</h4>)} />
         </Switch>

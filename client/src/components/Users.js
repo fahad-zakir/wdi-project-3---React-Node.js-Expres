@@ -7,6 +7,7 @@ class Users extends Component {
     render() {
         return (
             <UserIdContainer>
+                <div className="profile-card-container">
                     <div className="UserContainer">
                         <div clssName="frst-name">{this.props.firstName} {this.props.lastName}</div>
                         <div>{this.props.email}</div>
@@ -15,7 +16,7 @@ class Users extends Component {
                         </div>
                         <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
                     </div>
-            
+                </div>
             </UserIdContainer>
         )
     }

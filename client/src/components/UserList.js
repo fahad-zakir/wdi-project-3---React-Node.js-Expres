@@ -36,7 +36,6 @@ class UserList extends Component {
 }
 export default UserList
 
-
 const UserIdContainer = styled.div`
 display:flex;
 flex-direction:column;

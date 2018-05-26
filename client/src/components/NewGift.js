@@ -20,6 +20,7 @@ class NewGift extends Component {
         // and add it to
         const newGift = { ...this.state.newGift }
         newGift[attribute] = val
+        newGift.userID = { ...this.state.userID }
         this.setState({ newGift })
     }
     handleSubmit = (event) => {

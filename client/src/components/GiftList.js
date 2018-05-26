@@ -17,7 +17,7 @@ class GiftList extends Component {
                     firstName={user.firstName}
                     lastName={user.lastName}
                     giftName={gift.giftName}
-                    id={user.id}
+                    userID={gift.userID}
                     id={gift._id} />)
 
         })

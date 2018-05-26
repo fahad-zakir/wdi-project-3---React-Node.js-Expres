@@ -6,7 +6,7 @@ const Info = require('../db/models/Info')
 const mongoose = require('mongoose')
 
 
-// connect to database
+// connect to database mongoDB
 mongoose.connect('mongodb://localhost/project-3')
 
 mongoose.connection.once('open', () => {
@@ -20,14 +20,16 @@ mongoose.connection.on('error', (error) => {
   `)
     process.exit(-1)
 })
+// The seeds is what is going to fill in the Schema key values
+// Functions below are for when you seed the db, so everytime you seed it, this runs!
 
-// Delete all users, then add some fake ones
+// Delete all users, then add some fake ones using the info from the one's below
 User.remove({})
     .then(() => {
         const fahadZakir = new User({
             firstName: 'Fahad',
             lastName: 'Zakir',
-            email: 'fahadzakir81@gmail.com',
+            email: 'fahadzakir11@gmail.com',
             photoUrl: 'https://i.imgur.com/0yDZcCV.jpg'
         })
 
@@ -40,6 +42,7 @@ User.remove({})
             price: 300
         })
         nintendoSwitch.infoList.push(nintendoSwitchInfo)
+        // figure this one out
 
         const iphoneX = new Gift({
             giftName: 'Iphone X'

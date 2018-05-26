@@ -5,6 +5,7 @@ import axios from 'axios'
 import UserList from 'styled-components'
 
 
+
 class Home extends Component {
     render() {
         return (
@@ -55,7 +56,8 @@ const Container = styled.div`
         font-family: 'Special Elite', cursive, bold;
         padding-top: 50px;
     }
-    a{
+
+    a {
     text-decoration: none;
     color: white;
     font-size: 25px;

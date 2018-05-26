@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 import './App.css';
+import { Button }from 'react-bootstrap';
 import Home from './components/Home'
 import UserList from './components/UserList'
 import NewUser from './components/NewUser'
@@ -12,7 +13,7 @@ import UserEditDelete from './components/UserEditDelete'
 import GiftList from './components/GiftList'
 
 class App extends Component {
-
+  // you will be intializing the state,
   state = {
     users: [],
     gifts: [],
@@ -22,6 +23,9 @@ class App extends Component {
   userDatabase = () => {
     axios
       .get('/api/users')
+      // what you get back from the api/users and with the response , you will be setting the response data
+      // and you will store in the users varialbe
+      // this.setState will be stored inside of the state users once the data is collected and parsed through json
       .then(response => {
         const users = response.data
         this.setState({ users: users })
@@ -93,7 +97,7 @@ class App extends Component {
 
     const AllGifts = () => (<GiftList MyGifts={this.state.gifts} userID={this.state.userID} />)
 
-    const makeNewGift = () => (<NewGift createGift={this.createGift} gifts={this.state.gifts} />)
+    const makeNewGift = () => (<NewGift createGift={this.createGift} gifts={this.state.gifts} userID={this.state.userID}  />)
 
 
 

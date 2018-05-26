@@ -70,7 +70,7 @@ class NewUser extends Component {
                                 onChange={this.handleChange}
                                 name="photo"
                                 placeholder="photo"
-                                type="text"
+                                type="image"
                                 value={this.state.newUser.photoUrl} />
                         </div>
                         <button className="button" type="submit">

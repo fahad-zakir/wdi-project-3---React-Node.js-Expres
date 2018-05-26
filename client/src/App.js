@@ -13,13 +13,14 @@ import UserEditDelete from './components/UserEditDelete'
 import GiftList from './components/GiftList'
 
 class App extends Component {
-  // you will be intializing the state,
+  // you will be intializing the state, you are telling it that you want these array's later and possibly
+  // eveyrwhere
   state = {
     users: [],
     gifts: [],
     userID: []
   }
-
+// userDatabase is a function
   userDatabase = () => {
     axios
       .get('/api/users')
@@ -35,9 +36,14 @@ class App extends Component {
   giftDatabase = () => {
     axios
       .get('/api/gifts')
+      //then is a promise function
+
       .then(response => {
         const gifts = response.data
+        // we are saving the response param with the name response.data and saving it in a gift var
         this.setState({ gifts: gifts})
+        // this.setState is a built in react function and for the gifts in our state from above line 19
+        // fill the array with our variable
       })
   }
 

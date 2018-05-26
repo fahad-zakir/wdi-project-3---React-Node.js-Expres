@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 mongoose.Promise = global.Promise
+// so it's available every where
 
 const InfoSchema = new Schema({
 
@@ -30,6 +31,8 @@ const GiftSchema = new Schema({
         type:String
     },
     infoList: [InfoSchema]
+    // this is a list of info objects that look like the infoschema
+    // gift can have mulitple info objects and each object looks like infoschema
 }, {
         timestamps: {}
     })
@@ -50,7 +53,9 @@ const UserSchema = new Schema({
         type: String,
         default: 'https://i.imgur.com/ul23PsQ.jpg'
     },
-    gifts: [GiftSchema]
+    gifts: [ GiftSchema ]
+
+    // when you go to a user profile, it can have gifts, and the gifts have giftinfo
 }, {
         timestamps: {},
         usePushEach: true

@@ -18,7 +18,7 @@ class NewGift extends Component {
         let val = event.target.value
         // update the new information
         // and add it to
-        //new test
+        // same git origin test
         const newGift = { ...this.state.newGift }
         newGift[attribute] = val
         newGift.userID = { ...this.state.userID }

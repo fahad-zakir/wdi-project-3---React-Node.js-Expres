@@ -5,7 +5,7 @@ https://thawing-depths-48074.herokuapp.com/
 
 
 ## Project Description
-Don't forget those gifts you wanted for your loved ones with this app.  Make a list of gifts for anyone.  Just create a username and start making your list!
+Don't forget those gifts you wanted for your loved ones with this app.  Make a list of gifts by creating a username and start making your list!
 
 # Trello Board Link
 https://trello.com/b/SiVj4YCz/gifts-wishlists

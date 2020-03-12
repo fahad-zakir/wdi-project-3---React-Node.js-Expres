@@ -19,26 +19,27 @@ class UserList extends Component {
         })
 
             return (
-                <UserIdContainer>
-                    <div className="NavButtons">
-                        <Link to="/">Home</Link>
-                        <Link to="/new">Create User</Link>
-                    </div>
-                    <h1 className="users-list">Users List</h1>
-
-                    <div>
-                        <div className="user-info">{userList}</div>
-                    </div>
-                </UserIdContainer>
-        )
+              <UserIdContainer style={{ height: "100%", width:"100%" }}>
+                <div className="NavButtons">
+                  <Link to="/">Home</Link>
+                  <Link to="/new">Create User</Link>
+                </div>
+                <h1 className="users-list">Users List</h1>
+                <List>{userList}</List>
+              </UserIdContainer>
+            );
     }
 }
 export default UserList
-
+const List = styled.section`
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;  
+`;
 const UserIdContainer = styled.div`
 display:flex;
 flex-direction:column;
-height: 500vh;
  background: rgb(105, 155, 200);
     background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
     background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));

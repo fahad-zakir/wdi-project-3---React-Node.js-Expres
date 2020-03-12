@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Redirect, Link } from 'react-router-dom'
 import Users from './Users'
 
-
 class UserList extends Component {
 
     render() {

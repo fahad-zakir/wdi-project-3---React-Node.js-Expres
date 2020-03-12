@@ -5,8 +5,6 @@ import Gifts from './Gifts'
 import Users from './Users'
 
 
-
-
 class GiftList extends Component {
 
     render() {

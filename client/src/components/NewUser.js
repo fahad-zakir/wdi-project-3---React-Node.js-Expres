@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
 
-
-
-
 class NewUser extends Component {
 
     state = {
@@ -70,7 +67,7 @@ class NewUser extends Component {
                                 onChange={this.handleChange}
                                 name="photo"
                                 placeholder="photo"
-                                type="image"
+                                type="text"
                                 value={this.state.newUser.photoUrl} />
                         </div>
                         <button className="button" type="submit">

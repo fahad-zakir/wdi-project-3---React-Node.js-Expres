@@ -37,7 +37,7 @@ const List = styled.section`
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-content: stretch;
   height: 100%;
 `;

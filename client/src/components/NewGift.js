@@ -67,7 +67,7 @@ justify-content: center;
 -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  pading: 40px;
+  padding: 40px;
   width: 100%;
 }
 form {

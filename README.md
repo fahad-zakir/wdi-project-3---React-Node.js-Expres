@@ -1,5 +1,5 @@
 # WDI-Project-03
-# Gifts-Wishlists- 2018
+# Gifts-Wishlists
 
 https://thawing-depths-48074.herokuapp.com/
 

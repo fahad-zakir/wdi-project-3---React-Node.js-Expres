@@ -15,6 +15,7 @@ class Users extends Component {
                             <img src={this.props.photoUrl} alt="user-pict" className="user-pict" />
                         </div>
                         <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
+                        <Link className="update" to={`/user/${this.props.id}/new-gift`}>New Gift</Link>
                     </div>
                 </div>
             </UserIdContainer>

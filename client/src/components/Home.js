@@ -17,9 +17,7 @@ class Home extends Component {
 
                         <Col xs={12} sm={4} className="person-wrapper">
 
-                                <Image
-                                    src="http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png" responsive
-                                    alt="gift" className="main-img"/>
+                              
                                 
                                     <h1>Gifts Wishlist</h1>
 
@@ -36,25 +34,25 @@ class Home extends Component {
 
 export default Home
 
-const Container = styled.div `
-  font-family: "Lato", sans-serif;
-  font-family: "Playfair Display", serif;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
+const Container = styled.div`
 
   h1 {
-    font-family: "Special Elite", cursive, bold;
+    font-family: 'Satisfy', cursive;
+    font-weight: 500px;
+    font-size: 50px;
     padding-top: 50px;
+  }
+  .show-grid{
+    height: 100vh;
   }
 
   a {
-
     color: black;
     font-size: 25px;
     z-index: auto;
     &:hover {
-        color: black;
-text-shadow: 1px 1px 1px, 0 0 25px blue;    }
+      color: black;
+      text-shadow: 1px 1px 1px, 0 0 25px blue;
+    }
   }
 `;

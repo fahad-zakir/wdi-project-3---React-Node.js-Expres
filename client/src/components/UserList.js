@@ -34,12 +34,7 @@ class UserList extends Component {
 }
 export default UserList
 const List = styled.section`
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: stretch;
-  height: 100%;
+height: 100vh;
 `;
 const UserIdContainer = styled.div`
 min-height: 100vh;

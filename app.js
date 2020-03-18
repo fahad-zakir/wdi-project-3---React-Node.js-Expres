@@ -12,7 +12,11 @@ const app = express();
 
 //mongo settings
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+})
 
 const connection = mongoose.connection
 connection.on('connected', () => {

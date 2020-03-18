@@ -3,12 +3,6 @@
 /**
  * Module dependencies.
  */
-const mongoose = require('mongoose');
-mongoose.connect(null, {
-  useNewUrlParser: true
-}).catch(e => {
-  console.error(e.message);
-});
 
 var app = require('../app');
 var debug = require('debug')('wdi-project-3:server');

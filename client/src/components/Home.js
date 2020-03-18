@@ -21,7 +21,7 @@ class Home extends Component {
                                 
                                     <h1>Gifts Wishlist</h1>
 
-                                <Link to="/users">Users</Link>
+                                <Link className="link-home" to="/users">Users</Link>
                             </Col>
 
                         </Row>

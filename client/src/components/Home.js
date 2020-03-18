@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { Jumbotron, Grid, Row, Col, Image, Button } from 'react-bootstrap';
-import './Home.css';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
 
 class Home extends Component {
     render() {
@@ -32,14 +31,13 @@ class Home extends Component {
 export default Home
 
 const Container = styled.div`
-
   h1 {
-    font-family: 'Satisfy', cursive;
+    font-family: "Satisfy", cursive;
     font-weight: 500px;
     font-size: 60px;
     padding-top: 50px;
   }
-  .show-grid{
+  .show-grid {
     height: 100vh;
   }
 

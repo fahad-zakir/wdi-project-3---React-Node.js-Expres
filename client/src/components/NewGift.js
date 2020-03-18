@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
 
 
-
-
 class NewGift extends Component {
-
     state = {
         newGift: [],
         redirect: false
@@ -23,11 +20,13 @@ class NewGift extends Component {
         newGift.userID = { ...this.state.userID }
         this.setState({ newGift })
     }
+
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.createGift(this.state.newGift)
         this.setState({ redirect: true })
     }
+
     render() {
         if (this.state.redirect) {
             return <Redirect to="./gifts" />
@@ -60,7 +59,7 @@ export default NewGift
 //background from Taylor Vowell codpen
 const NewUserContainer = styled.div`
 width:100vw;
-height:100vh;
+min-height:100vh;
 background-image: linear-gradient(45deg, rgba(194, 233, 221, 0.5) 1%, rgba(104, 119, 132, 0.5) 100%), linear-gradient(-45deg, #494d71 0%, rgba(217, 230, 185, 0.5) 80%);
 display: flex;
 justify-content: center;

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Gifts from './Gifts'
-import Users from './Users'
 
 
 class GiftList extends Component {
@@ -10,49 +9,46 @@ class GiftList extends Component {
     render() {
         const giftList = this.props.MyGifts.map((gift, user, index) => {
             return (
+
+  
                 <Gifts
                     key={index}
                     firstName={user.firstName}
                     lastName={user.lastName}
                     giftName={gift.giftName}
+                    for={gift.for}
+                    price={gift.price}
                     userID={gift.userID}
-                    id={gift._id} />)
+                    id={gift.id} />)
 
         })
-
         return (
-            <GiftContainer >
-                <div className="NavButtons">
-                    <Link to="/">Home</Link>
-                    <Link to="./new-gift">Create Gift</Link>
-                    <h1 className="users-list">Gifts List</h1>
-                </div>
-                <div>
-                    <div className="user-info">{giftList}</div>
-                </div>
-            </GiftContainer>
-        )
+          <GiftContainer style={{ height: "100%", width: "100%" }}>
+            <div className="NavButtons">
+              <Link to="/">Home</Link>
+              <Link to="./new-gift">Create Gift</Link>
+              <h1 className="users-list">Gifts List</h1>
+            </div>
+            <div>
+              <List>{giftList}</List>
+            </div>
+          </GiftContainer>
+        );
     }
 }
 export default GiftList
 
-const FormContainer = styled.div`
-
-
-`
-
+const List = styled.section`
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+`;
 const GiftContainer = styled.div`
-display:flex;
-flex-direction:column;
-height: 500vh;
-background: rgb(105, 155, 200);
-    background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
-    background: -webkit - gradient(radial, top left, 0px, top left, 100 %, color - stop(0 %, rgba(105, 155, 200, 1)), color - stop(57 %, rgba(181, 197, 216, 1)));
-    background: -webkit - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
-    background: -o - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
-    background: -ms - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
-    background: radial - gradient(ellipse at top left, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 %);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#699bc8', endColorstr = '#b5c5d8', GradientType = 1);
+min-height: 100vh;
+ background: rgb(255,247,230);
+
 h1 {
     font-family: 'Special Elite', cursive, bold;
     padding-top: 50px;

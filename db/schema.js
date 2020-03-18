@@ -4,38 +4,32 @@ const Schema = mongoose.Schema
 mongoose.Promise = global.Promise
 // so it's available every where
 
-const InfoSchema = new Schema({
 
+const GiftSchema = new Schema(
+  {
     giftName: {
-        type: String,
-        // required: [true, 'Gift title is required!']
+      type: String,
+      // required: [true, 'Gift name is required!']
     },
     for: {
-        type: String,
-        // required: [true, 'For is required']
+      type: String,
     },
     price: {
-        type: Number,
-        // required: [true, 'Price is required!']
-    }
-}, {
-        timestamps: {}
-    })
-
-const GiftSchema = new Schema({
-    giftName: {
-        type: String,
-        // required: [true, 'Gift name is required!']
+      type: Number,
+    },
+    photoUrl: {
+      type: String,
+      default:
+        "http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
     },
     userID: {
-        type:String
-    },
-    infoList: [InfoSchema]
-    // this is a list of info objects that look like the infoschema
-    // gift can have mulitple info objects and each object looks like infoschema
-}, {
-        timestamps: {}
-    })
+      type: String,
+    }
+  },
+  {
+    timestamps: {}
+  }
+);
 
 const UserSchema = new Schema(
   {
@@ -67,7 +61,6 @@ const UserSchema = new Schema(
 
 module.exports = {
     UserSchema,
-    GiftSchema,
-    InfoSchema
+    GiftSchema
 }
 

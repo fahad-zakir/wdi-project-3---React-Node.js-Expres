@@ -5,9 +5,9 @@ import Home from "./components/Home";
 import UserList from "./components/UserList";
 import NewUser from "./components/NewUser";
 import NewGift from "./components/NewGift";
+import GiftList from "./components/GiftList";
 import UserEditDelete from "./components/UserEditDelete";
 // import Gift from './components/Gift'
-import GiftList from "./components/GiftList";
 
 class App extends Component {
     // you will be intializing the state, you are telling it that you want these
@@ -89,7 +89,6 @@ class App extends Component {
     render() {
         ////the function to grab all the users
         const DataOfUsers = () => <UserList MyUsers={this.state.users}/>;
-
         const makeNewUser = () => (<NewUser createUser={this.createUser} users={this.state.users}/>);
         const editUser = props => (<UserEditDelete
             updateUser={this.updateUser}
@@ -98,10 +97,10 @@ class App extends Component {
             users={this.state.users}
             {...props}/>);
 
-        // const DataOfGifts = () => (<GiftList MyGifts={this.state.gifts} />)
 
-        const AllGifts = () => (<GiftList MyGifts={this.state.gifts} userID={this.state.userID}/>);
-
+        const AllGifts = () => (<GiftList 
+            MyUsers={this.state.users}
+            MyGifts={this.state.gifts} userID={this.state.userID}/>);     
         const makeNewGift = () => (<NewGift
             createGift={this.createGift}
             gifts={this.state.gifts}

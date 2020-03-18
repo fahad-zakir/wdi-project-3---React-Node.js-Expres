@@ -7,8 +7,10 @@ import Users from './Users'
 class UserList extends Component {
 
   render() {
+    // What returns the multiple cards of users is the loop
     const userList = this.props.MyUsers.map((user, index) => {
       return (
+       
         <Users
           key={index}
           firstName={user.firstName}
@@ -17,6 +19,7 @@ class UserList extends Component {
           photoUrl={user.photoUrl}
           id={user._id}
         />
+         
       );
     });
 
@@ -42,14 +45,8 @@ align-items: stretch;
 `;
 const UserIdContainer = styled.div`
 min-height: 100vh;
- background: rgb(105, 155, 200);
-    background: -moz - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 );
-    background: -webkit - gradient(radial, top left, 0px, top left, 100 , color - stop(0 , rgba(105, 155, 200, 1)), color - stop(57 , rgba(181, 197, 216, 1)));
-    background: -webkit - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 %, rgba(181, 197, 216, 1) 57 );
-    background: -o - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 , rgba(181, 197, 216, 1) 57 );
-    background: -ms - radial - gradient(top left, ellipse cover, rgba(105, 155, 200, 1) 0 , rgba(181, 197, 216, 1) 57 );
-    background: radial - gradient(ellipse at top left, rgba(105, 155, 200, 1) 0 , rgba(181, 197, 216, 1) 57 );
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr = '#699bc8', endColorstr = '#b5c5d8', GradientType = 1);
+ background: rgb(255,247,230);
+
 h1 {
     font-family: 'Special Elite', cursive, bold;
     padding-top: 50px;

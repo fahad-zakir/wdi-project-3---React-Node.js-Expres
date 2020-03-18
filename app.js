@@ -18,6 +18,19 @@ mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true
 })
 
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Connected to Mongo!");
+  })
+  .catch(err => {
+    console.error("Error connecting to Mongo", err);
+  });
+
 const connection = mongoose.connection
 connection.on('connected', () => {
   console.log('Mongoose Connected Successfully')

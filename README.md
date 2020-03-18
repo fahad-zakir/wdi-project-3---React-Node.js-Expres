@@ -1,7 +1,7 @@
 # WDI-Project-03
 # Gifts-Wishlists
 
-https://https://damp-spire-11988.herokuapp.com/
+https://damp-spire-11988.herokuapp.com/
 
 
 ## Project Description

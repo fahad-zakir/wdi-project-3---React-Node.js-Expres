@@ -14,7 +14,7 @@ const app = express();
 mongoose.Promise = global.Promise
 
 mongoose
-  .connect(process.env.mongodb_uri, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true

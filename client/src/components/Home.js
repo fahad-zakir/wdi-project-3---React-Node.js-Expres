@@ -36,7 +36,7 @@ const Container = styled.div`
   h1 {
     font-family: 'Satisfy', cursive;
     font-weight: 500px;
-    font-size: 50px;
+    font-size: 60px;
     padding-top: 50px;
   }
   .show-grid{

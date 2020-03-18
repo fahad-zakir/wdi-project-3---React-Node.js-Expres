@@ -37,29 +37,33 @@ const GiftSchema = new Schema({
         timestamps: {}
     })
 
-const UserSchema = new Schema({
+const UserSchema = new Schema(
+  {
     firstName: {
-        type: String,
-        // required: [true, 'First name is required!']
+      type: String
+      // required: [true, 'First name is required!']
     },
     lastName: {
-        type: String,
-        // required: [true, 'Last name is required!']
+      type: String
+      // required: [true, 'Last name is required!']
     },
     email: {
-        type: String
+      type: String
     },
     photoUrl: {
-        type: String,
-        default: 'https://i.imgur.com/ul23PsQ.jpg'
+      type: String,
+      default:
+        "http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
     },
-    gifts: [ GiftSchema ]
+    gifts: [GiftSchema]
 
     // when you go to a user profile, it can have gifts, and the gifts have giftinfo
-}, {
-        timestamps: {},
-        usePushEach: true
-    })
+  },
+  {
+    timestamps: {},
+    usePushEach: true
+  }
+);
 
 module.exports = {
     UserSchema,

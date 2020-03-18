@@ -92,7 +92,7 @@ class UserEditDelete extends Component {
                             <div>
                                 <input
                                     onChange={this.handleChange}
-                                    name="photo"
+                                    name="photoUrl"
                                     placeholder="photo"
                                     type="text"
                                     value={this.state.user.photoUrl} />

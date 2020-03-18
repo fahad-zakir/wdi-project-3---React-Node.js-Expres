@@ -26,7 +26,7 @@ class UserList extends Component {
           <Link to="/">Home</Link>
           <Link to="/new">Create User</Link>
         </div>
-        <h1>Users List</h1>
+        <h1>Choose User</h1>
         <List>{userList}</List>
       </UserIdContainer>
     );

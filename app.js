@@ -12,14 +12,9 @@ const app = express();
 
 //mongo settings
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.MONGODB_URI, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true
-})
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(process.env.mongodb_uri, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true

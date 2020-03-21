@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import { Redirect, Link } from 'react-router-dom';
 import Gifts from './Gifts';
-import User from './User';
+
 
 class GiftList extends Component {
 

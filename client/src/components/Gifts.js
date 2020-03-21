@@ -12,7 +12,6 @@ class Gifts extends Component {
       <GiftContainer>
         <div className="profile-card-container">
           <div className="UserContainer">
-            <User />
             <div className="frst-name">
               {this.props.firstName} {this.props.lastName}
             </div>

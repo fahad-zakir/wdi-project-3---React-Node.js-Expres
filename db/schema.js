@@ -8,22 +8,22 @@ mongoose.Promise = global.Promise
 const GiftSchema = new Schema(
   {
     giftName: {
-      type: String,
+      type: String
       // required: [true, 'Gift name is required!']
     },
     for: {
-      type: String,
+      type: String
     },
     price: {
-      type: Number,
+      type: Number
     },
-    photoUrl: {
+    giftPhotoUrl: {
       type: String,
       default:
-        "http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
+        "https://www.creativefabrica.com/wp-content/uploads/2018/11/Happy-Birthday-Gift-Black-Yellow-by-Surya-Darmawan-580x386.png"
     },
     userID: {
-      type: String,
+      something_type: String
     }
   },
   {
@@ -51,7 +51,7 @@ const UserSchema = new Schema(
     },
     gifts: [GiftSchema]
 
-    // when you go to a user profile, it can have gifts, and the gifts have giftinfo
+    // when you go to a user profile, it can have gifts, and the gifts have gifts
   },
   {
     timestamps: {},

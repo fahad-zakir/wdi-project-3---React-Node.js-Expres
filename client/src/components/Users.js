@@ -8,13 +8,13 @@ class Users extends Component {
             <UserIdContainer>
                 <div className="profile-card-container">
                     <div className="UserContainer">
-                        <div clssName="frst-name">{this.props.firstName} {this.props.lastName}</div>
+                        <div className="frst-name">{this.props.firstName} {this.props.lastName}</div>
                         <div>{this.props.email}</div>
                         <div>
                             <img src={this.props.photoUrl} alt="user-pict" className="user-pict" />
                         </div>
-                        <Link className="update" to={`/user/${this.props.id}`}>Update</Link>
-                        <Link className="update" to={`/user/${this.props.id}/new-gift`}>New Gift</Link>
+                        <Link to={`/user/${this.props.id}`}>Update</Link>
+                        <Link to={`/user/${this.props.id}/new-gift`}>New Gift</Link>
                     </div>
                 </div>
             </UserIdContainer>

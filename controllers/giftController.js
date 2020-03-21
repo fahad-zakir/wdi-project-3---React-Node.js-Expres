@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 })
 
 // Find a specific gift by then delete it
-router.delete('/:giftId', async (req, res) => {
+router.delete('/:giftId/delete', async (req, res) => {
     try {
         await GiftfindByIdAndRemove(req.params.giftId)
         res.sendStatus(200)

@@ -1,40 +1,48 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import Gifts from './Gifts'
-
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import axios from "axios";
+import { Redirect, Link } from 'react-router-dom';
+import Gifts from './Gifts';
+import User from './User';
 
 class GiftList extends Component {
 
-    render() {
-        const giftList = this.props.MyGifts.map((gift, user, index) => {
-            return (
 
-  
-                <Gifts
-                    key={index}
-                    firstName={user.firstName}
-                    lastName={user.lastName}
-                    giftName={gift.giftName}
-                    for={gift.for}
-                    price={gift.price}
-                    userID={gift.userID}
-                    id={gift.id} />)
-
-        })
-        return (
-          <GiftContainer style={{ height: "100%", width: "100%" }}>
-            <div className="NavButtons">
-              <Link to="/">Home</Link>
-              <Link to="./new-gift">Create Gift</Link>
-              <h1 className="users-list">Gifts List</h1>
-            </div>
-            <div>
-              <List>{giftList}</List>
-            </div>
-          </GiftContainer>
-        );
-    }
+  render() {
+    // What returns the multiple cards of users is the loop
+    const giftList = this.props.MyGifts.map((gift, user, index) => {
+      return (
+        <Gifts
+          key={index}
+          firstName={user.firstName}
+          lastName={user.lastName}
+          photoUrl={gift.giftPhotoUrl}
+          giftName={gift.giftName}
+          for={gift.for}
+          price={gift.price}
+          userID={gift.userID}
+          id={gift._id}
+        />
+      );
+    });
+    return (
+      <GiftContainer style={{ height: "100%", width: "100%" }}>
+        <div className="NavButtons">
+          <Link to="/">Home</Link>
+          <Link to="./new-gift">Create Gift</Link>
+          <h1 className="users-list">Gifts List</h1>
+        </div>
+        <div>
+          <List>
+            {giftList}
+          </List>
+          <button className="button-2" onClick={this.handleDelete}>
+            Delete
+          </button>
+        </div>
+      </GiftContainer>
+    );
+  }
 }
 export default GiftList
 

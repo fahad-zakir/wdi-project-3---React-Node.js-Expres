@@ -81,7 +81,7 @@ class NewUser extends Component {
 }
 
 export default NewUser
-//background from Taylor Vowell codpen
+
 const NewUserContainer = styled.div`
 width:100vw;
 height:100vh;
@@ -93,7 +93,6 @@ justify-content: center;
   box-sizing: border-box;
   width: 100%;
 }
-
 form {
   border: 5px solid rgba(0,0,0, 0.3);
   display: flex;

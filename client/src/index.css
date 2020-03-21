@@ -28,12 +28,6 @@ body {
   padding-top: 10px;
 }
 
-.update {
-  padding-left: 10px;
-}
-
-
-
 .models-container {
   margin-left: 50px;
   margin-top: 50px;
@@ -54,6 +48,11 @@ body {
   font-family: 'Special Elite', cursive, bold;
 }
 
+.form-custom {
+  display: flex;
+  justify-content: center;
+}
+
 .first-name {
   margin-right: 20px;
 }
@@ -66,10 +65,15 @@ body {
   margin-top: 100px;
 }
 
+.custom-gift-text {
+  display: flex;
+  justify-content: center;
+}
+
 .new-gift {
   position: absolute;
-  margin-top: 80px;
-  padding-left: 45px;
+  font-size: 40px;
+
   padding-bottom: 40px;
   font-family: 'Special Elite', cursive, bold;
 }
@@ -121,10 +125,6 @@ body {
   width: 200px;
   border-radius: 49%;
   background: #D3D3D3;
-}
-
-.user-pict {
-  padding-bottom: 10px;
 }
 
 

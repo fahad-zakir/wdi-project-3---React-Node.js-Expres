@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from "axios";
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Gifts from './Gifts';
 
-
 class GiftList extends Component {
-
 
   render() {
     // What returns the multiple cards of users is the loop
@@ -36,9 +34,6 @@ class GiftList extends Component {
           <List>
             {giftList}
           </List>
-          <button className="button-2" onClick={this.handleDelete}>
-            Delete
-          </button>
         </div>
       </GiftContainer>
     );
@@ -80,5 +75,6 @@ display:block;
     text-shadow: none;
     text-shadow:2px 2px 2px silver;
   
-}}
+}
+}
 `

@@ -72,37 +72,37 @@ class GiftEditDelete extends Component {
             <div>
               <input
                 onChange={this.handleChange}
-                name="firstName"
-                placeholder="first name"
+                name="giftName"
+                placeholder="gift name"
                 type="text"
-                value={this.state.gift.firstName}
+                value={this.state.gift.giftName}
               />
             </div>
             <div>
               <input
                 onChange={this.handleChange}
-                name="lastName"
-                placeholder="last name"
+                name="for"
+                placeholder="for"
                 type="text"
-                value={this.state.gift.lastName}
+                value={this.state.gift.for}
               />
             </div>
             <div>
               <input
                 onChange={this.handleChange}
-                name="email"
-                placeholder="email"
-                type="text"
-                value={this.state.gift.email}
+                name="price"
+                placeholder="price"
+                type="number"
+                value={this.state.gift.price}
               />
             </div>
             <div>
               <input
                 onChange={this.handleChange}
-                name="photoUrl"
+                name="giftPhotoUrl"
                 placeholder="photo"
                 type="text"
-                value={this.state.gift.photoUrl}
+                value={this.state.gift.giftPhotoUrl}
               />
             </div>
             <button className="button" type="submit">
@@ -114,11 +114,8 @@ class GiftEditDelete extends Component {
           </form>
 
           <div className="link-div">
-            <div className="gift-link">
-              <Link to={`/gift/${this.state.userID}/new-gift`}>New Gift</Link>
-            </div>
             <div className="users-link">
-              <a href="/users">Back To Users</a>
+              <a href="/gifts">Back To Gifts</a>
             </div>
           </div>
         </FormContainer>
@@ -127,7 +124,7 @@ class GiftEditDelete extends Component {
   }
 }
 
-export default UserEditDelete;
+export default GiftEditDelete;
 
 const Container = styled.div`
 

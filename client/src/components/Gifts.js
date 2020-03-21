@@ -25,7 +25,7 @@ class Gifts extends Component {
             <div>{this.props.giftName}</div>
             <div>For: {this.props.for}</div>
             <div>${this.props.price}</div>
-            <Link to={`/user/${this.props.id}`}>Update</Link>
+            <Link to={`/user/${this.props.id}/gifts/edit`}>Update</Link>
           </div>
         </div>
       </GiftContainer>

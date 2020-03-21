@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 mongoose.Promise = global.Promise
 // so it's available every where
 
-
 const GiftSchema = new Schema(
   {
     giftName: {

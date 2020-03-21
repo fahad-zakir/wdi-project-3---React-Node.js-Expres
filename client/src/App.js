@@ -8,6 +8,7 @@ import NewGift from "./components/NewGift";
 import GiftList from "./components/GiftList";
 import Gifts from "./components/Gifts";
 import UserEditDelete from "./components/UserEditDelete";
+import GiftEditDelete from "./components/GiftEditDelete";
 
 class App extends Component {
   // you will be intializing the state, you are telling it that you want these
@@ -64,6 +65,11 @@ class App extends Component {
     const response = await axios.patch(`/api/users/${user._id}`, user);
     const users = this.UserDatabase;
   };
+  updateGift = async user => {
+    console.log(user._id);
+    const response = await axios.patch(`/api/users/${user._id}`, user);
+    const users = this.UserDatabase;
+  };
 
   deleteUser = async user => {
     console.log(`from the delete router`);
@@ -109,6 +115,15 @@ class App extends Component {
         {...props}
       />
     );
+    const editGift = props => (
+      <GiftEditDelete
+        updateGift={this.updateGift}
+        GiftDataBase={this.giftDatabase}
+        deleteGift={this.deleteGift}
+        gifts={this.state.gifts}
+        {...props}
+      />
+    );
 
     const AllGifts = props => (
       <GiftList
@@ -139,6 +154,7 @@ class App extends Component {
           <Route exact path="/gifts" component={DataOfGifts} />
           <Route exact path="/new" component={makeNewUser} />
           <Route exact path="/user/:userId" component={editUser} />
+          <Route exact path="/user/:userId/gifts/edit" component={editGift} />
           <Route exact path="/user/:userId/gifts" component={AllGifts} />
           <Route exact path="/user/:userId/new-gift" component={makeNewGift} />
           <Route exact path="*" render={() => <h4>Page not found!</h4>} />

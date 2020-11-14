@@ -10,11 +10,15 @@ class Users extends Component {
                     <div className="UserContainer">
                         <div className="frst-name">{this.props.firstName} {this.props.lastName}</div>
                         <div>{this.props.email}</div>
+                        <div>{this.props.gifts}</div>
                         <div>
                             <img src={this.props.photoUrl} alt="user-pict" className="user-pict" />
                         </div>
-                        <Link to={`/user/${this.props.id}`}>Update</Link>
-                        <Link to={`/user/${this.props.id}/new-gift`}>New Gift</Link>
+                        <div>
+
+                        </div>
+                        <Link to={`/users/${this.props.id}`}>Update</Link>
+                        <Link to={`/users/${this.props.id}/new-gift`}>New Gift</Link>
                     </div>
                 </div>
             </UserIdContainer>

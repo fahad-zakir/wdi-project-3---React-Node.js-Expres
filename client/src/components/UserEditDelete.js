@@ -106,7 +106,7 @@ class UserEditDelete extends Component {
 
                         <div className="link-div">
                             <div className="gift-link">
-                                <Link to={`/user/${this.state.userID}/new-gift`}>New Gift</Link>
+                                <Link to={`/users/${this.state.userID}/new-gift`}>New Gift</Link>
                             </div>
                             <div className="users-link">
                                 <a href="/users">Back To Users</a>

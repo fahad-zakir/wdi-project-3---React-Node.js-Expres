@@ -13,7 +13,7 @@ class Gifts extends Component {
         <div className="profile-card-container">
           <div className="UserContainer">
             <div className="frst-name">
-              {this.props.firstName} {this.props.lastName}
+              {`${this.props.id} ${this.props.lastName}`}
             </div>
             <div>
               <img
@@ -25,7 +25,7 @@ class Gifts extends Component {
             <div>{this.props.giftName}</div>
             <div>For: {this.props.for}</div>
             <div>${this.props.price}</div>
-            <Link to={`/user/${this.props.id}/gifts/edit`}>Update</Link>
+            <Link to={`/users/${this.props.id}/gifts/edit`}>Update</Link>
           </div>
         </div>
       </GiftContainer>

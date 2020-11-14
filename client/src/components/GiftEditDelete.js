@@ -15,7 +15,7 @@ class GiftEditDelete extends Component {
       redirect: false,
       isStateNotSet: true
     },
-    userID: ""
+    giftID: ""
   };
   handleChange = event => {
     const updateGift = {
@@ -27,25 +27,25 @@ class GiftEditDelete extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.updateUser(this.state.gift);
+    this.props.updateGift(this.state.gift);
     this.updateCurrentState();
     this.props.GiftDataBase();
     this.setState({ redirect: true });
   };
 
   handleDelete = () => {
+    this.props.deleteGift(this.state.gift)
     console.log("about to delete a gift from the app.js");
-    this.props.deleteGift(this.state.gift);
   };
 
   updateCurrentState = () => {
     axios
-      .get(`/api/user/${this.props.match.params.userId}/gifts`, this.state.gift)
+      .get(`/api/users/${this.props.match.params.giftId}/gifts/edit`, this.state.gift)
       .then(response => {
         this.setState({
           gift: response.data,
           isStateNotSet: false,
-          userID: this.props.match.params.userId
+          giftID: this.props.match.params.giftId
         });
       })
       .catch(error => {
@@ -58,12 +58,7 @@ class GiftEditDelete extends Component {
   }
 
   render() {
-    if (this.state.redirect === true) {
-      return <Redirect to="/user/" />;
-    }
-    return this.state.isStateNotSet ? (
-      <div></div>
-    ) : (
+    return (
       <Container>
         <h2>Update Gift</h2>
 
@@ -115,7 +110,7 @@ class GiftEditDelete extends Component {
 
           <div className="link-div">
             <div className="users-link">
-              <a href="/gifts">Back To Gifts</a>
+                   <Link to={`/users/${this.props.userID}/gifts`}>Back to Gifts</Link>
             </div>
           </div>
         </FormContainer>

@@ -3,21 +3,24 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Users from './Users'
 
-
 class UserList extends Component {
 
   render() {
+
     // What returns the multiple cards of users is the loop
     const userList = this.props.MyUsers.map((user, index) => {
       return (
-       
+
         <Users
           key={index}
           firstName={user.firstName}
           lastName={user.lastName}
+          giftName={user.gifts.giftName}
           email={user.email}
           photoUrl={user.photoUrl}
           id={user._id}
+          gift= {user.gifts}
+      
         />
          
       );

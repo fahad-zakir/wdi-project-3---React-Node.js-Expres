@@ -1,64 +1,97 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true })
 // This mergeParams is important! It means that you should be able to get route params from the full route
-const Gift = require('../db/models/Gift')
+const User = require("../db/models/User");
+const Gift = require("../db/models/Gift");
 
-router.get('/', async (req, res) => {
-    Gift.find({}).then(gifts => { //Find all of the users from the database
-        //send JSON back for all users
-        res.json(gifts)
-        //.Catch is used for any errors that might appear
-    }).catch(err => {
-        console.log(err)
-        res.json("caught error")
+
+// get routes
+router.get("/", async (req, res) => {
+  Gift.find({})
+    .then(gifts => {
+      //Find all of the users from the database
+      //send JSON back for all users
+      res.json(gifts);
+      //.Catch is used for any errors that might appear
     })
+    .catch(err => {
+      console.log(err);
+      res.json("caught error");
+    });
+});
+
+// get routes
+router.get("/", async (req, res) => {
+    const userId = req.params.userId
+
+  User.findById(userId)
+    .then((user) => {
+      //Find all of the users from the database
+      //send JSON back for all users
+      res.json(gifts, {
+      //.Catch is used for any errors that might appear
+      userFullName: `${user.firstName} ${user.lastName}`,
+      userId: user._id,
+      gifts: user.gifts,
+      photoUrl: user.photoUrl
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      res.json("caught error");
+    });
 })
 
-//Get a single gift
-router.get('/:giftId', async (req, res) => {
-    try {
-        console.log(req.params.giftId)
-        const gift = await Gift.findById(req.params.giftId)
-        // send json of gift
-        res.json(gift)
-    } catch (err) {
-        res.send(err)
-    }
-})
 
-// Find a user, then create a new Gift, push it into the users existing gifts and then save the user
+  router.get('/new', (req, res) => {
+    const userId = req.params.userId
+    res.render(gifts, {
+      userId
+    })
+  })
+
+  router.get('/:giftId', (req, res) => {
+    const userId = req.params.userId
+    const giftId = req.params.giftId
+
+    User.findById(userId)
+      .then((user) => {
+        const gift = user.gifts.id(giftId)
+        res.render(gifts, {
+          userId,
+          gift
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  })
+
 router.post('/', async (req, res) => {
-    try {
-        const newGift = await Gift.create(req.body)
-        res.json(newGift)
-    } catch (error) {
-        console.log(error)
-        res.sendStatus(500)
-    }
+  try {
+    const newGift = await Gift.create(req.body)
+    res.json(newGift)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
 })
 
-// Find a specific gift by then delete it
 router.delete('/:giftId/delete', async (req, res) => {
-    try {
-        await GiftfindByIdAndRemove(req.params.giftId)
-        res.sendStatus(200)
-    } catch (error) {
-        console.log(error)
-        res.sendStatus(500)
-    }
+  try {
+    await Gift.findByIdAndRemove(req.params.giftId) // Delete the user from the database
+    res.sendStatus(200) // Send back a status of 200 to tell the user that the delete was successful
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500) // If there is any error, tell the user something went wrong on the server
+  }
 })
 
-// Find a user, then search for a specific idea id, then update the idea based on the contents of req.body.idea 
-router.patch('/:giftId', async (req, res) => {
-    try {
-        const updatedGift =
-            await Gift.findByIdAndUpdate(req.params.giftId, req.body, { new: true })
-            console.log('FromGiftPatch:' + req.body)
-            res.json(updatedGift)
-    } catch (error) {
-        console.log(error)
-        res.sendStatus(500)
-    }
-})
+
+
+
+
+
+
 
 module.exports = router

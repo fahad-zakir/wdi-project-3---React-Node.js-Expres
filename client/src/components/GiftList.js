@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from "axios";
 import { Link } from 'react-router-dom';
 import Gifts from './Gifts';
 
 class GiftList extends Component {
+
 
   render() {
     // What returns the multiple cards of users is the loop
@@ -75,6 +75,5 @@ display:block;
     text-shadow: none;
     text-shadow:2px 2px 2px silver;
   
-}
-}
+}}
 `

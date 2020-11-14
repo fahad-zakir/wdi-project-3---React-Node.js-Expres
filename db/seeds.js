@@ -48,7 +48,7 @@ User.remove({})
         const iphoneX = new Gift({
             giftName: 'Iphone X',
             price: 600,
-            for: dad,
+            for: 'Dad',
             photoUrl: 'https://i.imgur.com/0yDZcCV.jpg'
         })
 
@@ -72,14 +72,14 @@ User.remove({})
         const samsungHd = new Gift({
           giftName: "Samsung",
           price: 600,
-          for: bro,
+          for: "Bro",
           photoUrl: "https://i.imgur.com/0yDZcCV.jpg"
         });
 
         const macbookPro = new Gift({
           giftName: "MacbookPro",
           price: 900,
-          for: wife,
+          for: "Wife",
           photoUrl: "https://i.imgur.com/0yDZcCV.jpg"
         });
 

@@ -20,9 +20,6 @@ const GiftSchema = new Schema(
       type: String,
       default:
         "https://www.creativefabrica.com/wp-content/uploads/2018/11/Happy-Birthday-Gift-Black-Yellow-by-Surya-Darmawan-580x386.png"
-    },
-    userID: {
-      something_type: String
     }
   },
   {
@@ -50,7 +47,7 @@ const UserSchema = new Schema(
     },
     gifts: [GiftSchema]
 
-    // when you go to a user profile, it can have gifts, and the gifts have gifts
+    // when you go to a user profile, it can have gifts, and the gifts have giftinfo
   },
   {
     timestamps: {},

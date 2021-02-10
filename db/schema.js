@@ -46,7 +46,6 @@ const UserSchema = new Schema(
         "http://pluspng.com/img-png/gift-png-png-file-name-christmas-gift-400.png"
     },
     gifts: [GiftSchema]
-
     // when you go to a user profile, it can have gifts, and the gifts have giftinfo
   },
   {

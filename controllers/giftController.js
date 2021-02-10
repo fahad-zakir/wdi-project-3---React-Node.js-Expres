@@ -42,7 +42,6 @@ router.get("/", async (req, res) => {
     });
 })
 
-
   router.get('/new', (req, res) => {
     const userId = req.params.userId
     res.render(gifts, {

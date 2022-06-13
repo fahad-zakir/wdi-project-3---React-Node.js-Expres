@@ -8,12 +8,13 @@ class GiftList extends Component {
 
   render() {
     // What returns the multiple cards of users is the loop
-    const giftList = this.props.MyGifts.map((gift, user, index) => {
+    const giftList = this.props.MyGifts.map((gift, index) => {
       return (
+      
         <Gifts
           key={index}
-          firstName={user.firstName}
-          lastName={user.lastName}
+          firstName={gift.firstName}
+          lastName={gift.lastName}
           photoUrl={gift.giftPhotoUrl}
           giftName={gift.giftName}
           for={gift.for}
@@ -27,7 +28,7 @@ class GiftList extends Component {
       <GiftContainer style={{ height: "100%", width: "100%" }}>
         <div className="NavButtons">
           <Link to="/">Home</Link>
-          <Link to="./new-gift">Create Gift</Link>
+          <Link to="./gifts/new">Create Gift</Link>
           <h1 className="users-list">Gifts List</h1>
         </div>
         <div>

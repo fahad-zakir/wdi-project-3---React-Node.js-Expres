@@ -5,20 +5,20 @@ const User = require("../db/models/User");
 const Gift = require("../db/models/Gift");
 
 
-// get routes
-router.get("/", async (req, res) => {
-  Gift.find({})
-    .then(gifts => {
-      //Find all of the users from the database
-      //send JSON back for all users
-      res.json(gifts);
-      //.Catch is used for any errors that might appear
-    })
-    .catch(err => {
-      console.log(err);
-      res.json("caught error");
-    });
-});
+//get routes
+// router.get("/", async (req, res) => {
+//   Gift.find({})
+//     .then(gifts => {
+//       //Find all of the users from the database
+//       //send JSON back for all users
+//       res.json(gifts);
+//       //.Catch is used for any errors that might appear
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.json("caught error");
+//     });
+// });
 
 // get routes
 router.get("/", async (req, res) => {
@@ -42,6 +42,7 @@ router.get("/", async (req, res) => {
     });
 })
 
+  //new gift
   router.get('/new', (req, res) => {
     const userId = req.params.userId
     res.render(gifts, {
@@ -51,7 +52,7 @@ router.get("/", async (req, res) => {
 
   router.get('/:giftId', (req, res) => {
     const userId = req.params.userId
-    const giftId = req.params.giftId
+    const giftId = rq.params.giftId
 
     User.findById(userId)
       .then((user) => {
@@ -66,25 +67,42 @@ router.get("/", async (req, res) => {
       })
   })
 
-router.post('/', async (req, res) => {
-  try {
-    const newGift = await Gift.create(req.body)
-    res.json(newGift)
-  } catch (error) {
-    console.log(error)
-    res.sendStatus(500)
-  }
+router.post('/', (request, response) => {
+    const userId = request.params.userId
+    const newGift = request.body
+
+    User.findById(userId)
+        .then((user) => {
+            user.gifts.push(newGift)
+            return user.save()
+        })
+        .then(() => {
+            response.redirect(`/users/${userId}/gifts`)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
 })
 
-router.delete('/:giftId/delete', async (req, res) => {
-  try {
-    await Gift.findByIdAndRemove(req.params.giftId) // Delete the user from the database
-    res.sendStatus(200) // Send back a status of 200 to tell the user that the delete was successful
-  } catch (error) {
-    console.log(error)
-    res.sendStatus(500) // If there is any error, tell the user something went wrong on the server
-  }
+
+router.get('/:giftId/delete', (request, response) => {
+    const userId = request.params.userId
+    const giftId = request.params.giftId
+
+    User.findById(userId)
+        .then((user) => {
+            user.gifts.id(giftId).remove()
+            return user.save()
+        })
+        .then(() => {
+            response.redirect(`/users/${userId}/gifts/`)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 })
+
 
 
 

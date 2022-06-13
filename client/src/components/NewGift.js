@@ -8,6 +8,7 @@ class NewGift extends Component {
         newGift: [],
         redirect: false
     }
+    
     //this is a function that handles the changes the user makes
     handleChange = (event) => {
         //after user fill's out the form, the information needs to be stored in a variable

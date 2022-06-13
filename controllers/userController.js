@@ -34,14 +34,6 @@ router.get('/:userId', (req, res) => {
         })
 })
 
-// router.get('/', (req,res) => {
-//     res.json({name: 'Fahad'})
-// })
-
-// router.get('/kevin', (req, res) => {
-//     res.json({ name: 'kevin' })
-// })
-
 //To create a new user
 router.post('/', async (req, res) => {
     try {

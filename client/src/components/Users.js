@@ -18,7 +18,7 @@ class Users extends Component {
 
                         </div>
                         <Link to={`/users/${this.props.id}`}>Update</Link>
-                        <Link to={`/users/${this.props.id}/new-gift`}>New Gift</Link>
+                        <Link to={`/users/${this.props.id}/gifts`}>New Gift</Link>
                     </div>
                 </div>
             </UserIdContainer>

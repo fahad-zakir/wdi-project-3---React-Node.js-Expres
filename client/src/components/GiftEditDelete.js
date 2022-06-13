@@ -38,9 +38,11 @@ class GiftEditDelete extends Component {
     console.log("about to delete a gift from the app.js");
   };
 
+
+
   updateCurrentState = () => {
     axios
-      .get(`/api/users/${this.props.match.params.giftId}/gifts/edit`, this.state.gift)
+      .get(`/api/users/${this.props.match.params.userId}/gifts/${this.props.match.params.giftId}`, this.state.gift)
       .then(response => {
         this.setState({
           gift: response.data,

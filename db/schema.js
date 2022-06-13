@@ -23,7 +23,7 @@ const GiftSchema = new Schema(
     }
   },
   {
-    timestamps: {}
+    timestamps: {},
   }
 );
 

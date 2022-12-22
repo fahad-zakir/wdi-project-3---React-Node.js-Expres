@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Users from './Users'
 
-class UserList extends Component {
+class UserList extends Component {  
 
   render() {
 
@@ -19,8 +19,7 @@ class UserList extends Component {
           email={user.email}
           photoUrl={user.photoUrl}
           id={user._id}
-          gift= {user.gifts}
-      
+          gift= {user.gifts}      
         />
          
       );

@@ -41,7 +41,6 @@ class App extends Component {
         const savedGifts = response.data;
         const users = this.state.users;
         // we are saving the response param with the name response.data and saving it in
-        console.log(gifts)
         //gifts below are for setting state in gifts state array from above
         this.setState({ gifts: savedGifts, users: users});
         // this.setState is a built in react function and for the gifts in our state
@@ -57,7 +56,7 @@ class App extends Component {
 
     // grab the new user we just created in the database
     const newUser = response.data;
-console.log(newUser);
+    console.log(newUser);
     // put that new user into our list of users on the `state`
     const users = [...this.state.users];
     users.push(newUser);

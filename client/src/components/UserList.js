@@ -1,16 +1,13 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import Users from './Users'
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Users from "./Users";
 
-class UserList extends Component {  
-
+class UserList extends Component {
   render() {
-
     // What returns the multiple cards of users is the loop
     const userList = this.props.MyUsers.map((user, index) => {
       return (
-
         <Users
           key={index}
           firstName={user.firstName}
@@ -19,9 +16,8 @@ class UserList extends Component {
           email={user.email}
           photoUrl={user.photoUrl}
           id={user._id}
-          gift= {user.gifts}      
+          gift={user.gifts}
         />
-         
       );
     });
 
@@ -37,13 +33,13 @@ class UserList extends Component {
     );
   }
 }
-export default UserList
+export default UserList;
 const List = styled.section`
-margin-top: 50px;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: stretch;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
 `;
 const UserIdContainer = styled.div`
 min-height: 100vh;
@@ -63,7 +59,7 @@ display:block;
     font-family: 'Lato', sans-serif;
     font-family: 'Playfair Display', serif;
     font-weight: 300;
-  text-decoration: none;
+    text-decoration: none;
     color: black;
     font-size: 20px;
     padding: 30px;

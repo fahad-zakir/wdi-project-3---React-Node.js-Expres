@@ -37,7 +37,7 @@ class UserEditDelete extends Component {
     }
 
     updateCurrentState = () => {
-        axios.get(`/api/users/${this.props.match.params.userId}`, this.state.user)
+        axios.get(`/users/${this.props.match.params.userId}`, this.state.user)
             .then(response => {
                 this.setState({ user: response.data, isStateNotSet: false, userID: this.props.match.params.userId })
             })

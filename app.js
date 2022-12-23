@@ -38,8 +38,8 @@ connection.on('error', (err) => {
 //serve static react files
 app.use(express.static(__dirname + '/client/build/'))
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
-
+  res.sendFile(__dirname + '/client/build/index.html')
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

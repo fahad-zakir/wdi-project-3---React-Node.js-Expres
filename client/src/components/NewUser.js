@@ -1,86 +1,88 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 class NewUser extends Component {
+  state = {
+    newUser: [],
+    redirect: false,
+  };
+  //this is a function that handles the changes the user makes
+  handleChange = (event) => {
+    //after user fill's out the form, the information needs to be stored in a variable
+    const attribute = event.target.name;
+    let val = event.target.value;
+    // what your typing for inst. name
+    // update the new information
+    // and add it to
+    const newUser = { ...this.state.newUser };
+    newUser[attribute] = val;
+    this.setState({ newUser });
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.createUser(this.state.newUser);
+    this.setState({ redirect: true });
+  };
+  render() {
+    if (this.state.redirect) {
+      return <Redirect to="/users" />;
+    }
+    return (
+      <NewUserContainer>
+        <div></div>
+        <div className="form">
+          <h2 className="user-h2">Create New User</h2>
 
-    state = {
-        newUser: [],
-        redirect: false
-    }
-    //this is a function that handles the changes the user makes
-    handleChange = (event) => {
-        //after user fill's out the form, the information needs to be stored in a variable
-        const attribute = event.target.name
-        let val = event.target.value
-        // what your typing for inst. name
-        // update the new information
-        // and add it to
-        const newUser = { ...this.state.newUser }
-        newUser[attribute] = val
-        this.setState({ newUser })
-    }
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.createUser(this.state.newUser)
-        this.setState({ redirect: true })
-    }
-    render() {
-        if (this.state.redirect) {
-            return <Redirect to="/users" />
-        }
-        return (
-            <NewUserContainer>
-                <div>
-                </div>
-                <div className="form">
-                    <h2 className="user-h2">Create New User</h2>
-
-                    <form onSubmit={this.handleSubmit}>
-
-                        <div>
-                            <input
-                                onChange={this.handleChange}
-                                name="firstName"
-                                placeholder="first name"
-                                type="text" required
-                                value={this.state.newUser.firstName} />
-                        </div>
-                        <div>
-                            <input
-                                onChange={this.handleChange}
-                                name="lastName"
-                                placeholder="last name"
-                                type="text"
-                                value={this.state.newUser.lastName} />
-                        </div>
-                        <div>
-                            <input
-                                onChange={this.handleChange}
-                                name="email"
-                                placeholder="email"
-                                type="text"
-                                value={this.state.newUser.email} />
-                        </div>
-                        <div>
-                            <input
-                                onChange={this.handleChange}
-                                name="photo"
-                                placeholder="photo"
-                                type="text"
-                                value={this.state.newUser.photoUrl} />
-                        </div>
-                        <button className="button" type="submit">
-                            Submit
-          </button>
-                    </form>
-                </div>
-            </NewUserContainer>
-        )
-    }
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="firstName"
+                placeholder="first name"
+                type="text"
+                required
+                value={this.state.newUser.firstName}
+              />
+            </div>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="lastName"
+                placeholder="last name"
+                type="text"
+                value={this.state.newUser.lastName}
+              />
+            </div>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="email"
+                placeholder="email"
+                type="text"
+                value={this.state.newUser.email}
+              />
+            </div>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="photo"
+                placeholder="photo"
+                type="text"
+                value={this.state.newUser.photoUrl}
+              />
+            </div>
+            <button className="button" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </NewUserContainer>
+    );
+  }
 }
 
-export default NewUser
+export default NewUser;
 
 const NewUserContainer = styled.div`
 width:100vw;
@@ -122,4 +124,4 @@ form {
   transition: all 0.25s ease;
   background: #74942c;
 }
-`
+`;

@@ -1,94 +1,111 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import axios from "axios";
 import { Redirect, Link } from 'react-router-dom'
 
 
 class NewGift extends Component {
-    state = {
-        newGift: [],
-        redirect: false
-    }
-    
-    //this is a function that handles the changes the user makes
-    handleChange = (event) => {
-        //after user fill's out the form, the information needs to be stored in a variable
-        const attribute = event.target.name
-        let val = event.target.value
-        // update the new information
-        // and add it to
-        const newGift = { ...this.state.newGift }
-        newGift[attribute] = val
-        newGift.userID = { ...this.state.userID }
-        this.setState({ newGift })
+  state = {
+    newGift: [],
+    redirect: false,
+    id: null
+  };
+
+  //this is a function that handles the changes the user makes
+  handleChange = (event) => {
+    //after user fill's out the form, the information needs to be stored in a variable
+    const attribute = event.target.name;
+    let val = event.target.value;
+    // update the new information
+    // and add it to
+    const newGift = { ...this.state.newGift };
+    newGift[attribute] = val;
+    this.setState({ newGift });
+  };
+
+  updateCurrentState = () => {
+    axios
+      .get(`/users/${this.props.match.params.userId}`, this.state.user)
+      .then((response) => {
+        console.log(response.data._id);
+        this.setState({ id: response.data._id})
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+// this.props.match.params.userId
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.createGift(this.state.newGift);
+    this.setState({ redirect: true });
+  };
+
+  componentWillMount() {
+    this.updateCurrentState();
+  }
+
+  render() {
+    if (this.state.redirect) {
+      return <Redirect to="./gifts" />;
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.createGift(this.state.newGift)
-        this.setState({ redirect: true })
-    }
-
-    render() {
-        if (this.state.redirect) {
-            return <Redirect to="./gifts" />
-        }
-
-        return (
-          <NewUserContainer>
-            <div className="NavButtons">
-              <Link to="/">Home</Link>
-              <Link to="/users">Users</Link>
+    return (
+      <NewUserContainer>
+        <div className="NavButtons">
+          <Link to="/">Home</Link>
+          <Link to="/users">Users</Link>
+        </div>
+        <div className="custom-gift-text">
+          <h2 className="new-gift">Add New Gift</h2>
+        </div>
+        <div className="form-custom">
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="giftName"
+                placeholder="gift name"
+                type="text"
+                required
+                value={this.state.newGift.giftName}
+              />
             </div>
-            <div className="custom-gift-text">
-              <h2 className="new-gift">Add New Gift</h2>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="for"
+                placeholder="For"
+                type="text"
+                value={this.state.newGift.for}
+              />
             </div>
-            <div className="form-custom">
-              <form onSubmit={this.handleSubmit}>
-                <div>
-                  <input
-                    onChange={this.handleChange}
-                    name="giftName"
-                    placeholder="gift name"
-                    type="text"
-                    required
-                    value={this.state.newGift.giftName}
-                  />
-                </div>
-                <div>
-                  <input
-                    onChange={this.handleChange}
-                    name="for"
-                    placeholder="For"
-                    type="text"
-                    value={this.state.newGift.for}
-                  />
-                </div>
-                <div>
-                  <input
-                    onChange={this.handleChange}
-                    name="price"
-                    placeholder="price"
-                    type="number"
-                    value={this.state.newGift.price}
-                  />
-                </div>
-                <div>
-                  <input
-                    onChange={this.handleChange}
-                    name="giftPhotoUrl"
-                    placeholder="photo"
-                    type="text"
-                    value={this.state.newGift.giftPhotoUrl}
-                  />
-                </div>
-                <button className="button" type="submit">
-                  Submit
-                </button>
-              </form>
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="price"
+                placeholder="price"
+                type="number"
+                value={this.state.newGift.price}
+              />
             </div>
-          </NewUserContainer>
-        );
-    }
+            <div>
+              <input
+                onChange={this.handleChange}
+                name="giftPhotoUrl"
+                placeholder="photo"
+                type="text"
+                value={this.state.newGift.giftPhotoUrl}
+              />
+            </div>
+            <button className="button" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </NewUserContainer>
+    );
+  }
 }
 
 export default NewGift

@@ -7,6 +7,7 @@ class UserList extends Component {
   render() {
     // What returns the multiple cards of users is the loop
     const userList = this.props.MyUsers.map((user, index) => {
+      console.log(user)
       return (
         <Users
           key={index}

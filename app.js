@@ -57,7 +57,7 @@ app.use("/users", userController);
 app.get("*", userController);
 
 const giftController = require("./controllers/giftController");
-app.use("/users/:userId/gifts", giftController);
+app.use("/users/gifts", giftController);
 // ./controllers/users
 const { User } = require("./db/schema");
 const router = express.Router();

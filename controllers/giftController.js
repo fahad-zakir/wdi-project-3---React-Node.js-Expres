@@ -1,114 +1,70 @@
-const express = require('express');
-const router = express.Router({ mergeParams: true })
+const express = require("express");
+const router = express.Router({ mergeParams: true });
 // This mergeParams is important! It means that you should be able to get route params from the full route
-const User = require("../db/models/User");
 const Gift = require("../db/models/Gift");
 
-
-//get routes
-// router.get("/", async (req, res) => {
-//   Gift.find({})
-//     .then(gifts => {
-//       //Find all of the users from the database
-//       //send JSON back for all users
-//       res.json(gifts);
-//       //.Catch is used for any errors that might appear
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.json("caught error");
-//     });
-// });
-
-// get routes
 router.get("/", async (req, res) => {
-    const userId = req.params.userId
-
-  User.findById(userId)
-    .then((user) => {
+  Gift.find({})
+    .then((gifts) => {
       //Find all of the users from the database
       //send JSON back for all users
-      res.json(gifts, {
+      res.json(gifts);
       //.Catch is used for any errors that might appear
-      userFullName: `${user.firstName} ${user.lastName}`,
-      userId: user._id,
-      gifts: user.gifts,
-      photoUrl: user.photoUrl
-      })
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.json("caught error");
     });
-})
+});
 
-  //new gift
-  router.get('/new', (req, res) => {
-    const userId = req.params.userId
-    res.render(gifts, {
-      userId
-    })
-  })
+//Get a single gift
+router.get("/:giftId", async (req, res) => {
+  try {
+    console.log(req.params.giftId);
+    const gift = await Gift.findById(req.params.giftId);
+    // send json of gift
+    res.json(gift);
+  } catch (err) {
+    res.send(err);
+  }
+});
 
-  router.get('/:giftId', (req, res) => {
-    const userId = req.params.userId
-    const giftId = rq.params.giftId
+// Find a user, then create a new Gift, push it into the users existing gifts and then save the user
+router.post("/", async (req, res) => {
+  try {
+    const newGift = await Gift.create(req.body);
+    res.json(newGift);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
-    User.findById(userId)
-      .then((user) => {
-        const gift = user.gifts.id(giftId)
-        res.render(gifts, {
-          userId,
-          gift
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
+// Find a specific gift by then delete it
+router.delete("/:giftId", async (req, res) => {
+  try {
+    await GiftfindByIdAndRemove(req.params.giftId);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
-router.post('/', (request, response) => {
-    const userId = request.params.userId
-    const newGift = request.body
+// Find a user, then search for a specific idea id, then update the idea based on the contents of req.body.idea
+router.patch("/:giftId", async (req, res) => {
+  try {
+    const updatedGift = await Gift.findByIdAndUpdate(
+      req.params.giftId,
+      req.body,
+      { new: true }
+    );
+    console.log("FromGiftPatch:" + req.body);
+    res.json(updatedGift);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
-    User.findById(userId)
-        .then((user) => {
-            user.gifts.push(newGift)
-            return user.save()
-        })
-        .then(() => {
-            response.redirect(`/users/${userId}/gifts`)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-
-})
-
-
-router.get('/:giftId/delete', (request, response) => {
-    const userId = request.params.userId
-    const giftId = request.params.giftId
-
-    User.findById(userId)
-        .then((user) => {
-            user.gifts.id(giftId).remove()
-            return user.save()
-        })
-        .then(() => {
-            response.redirect(`/users/${userId}/gifts/`)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-})
-
-
-
-
-
-
-
-
-
-module.exports = router
+module.exports = router;

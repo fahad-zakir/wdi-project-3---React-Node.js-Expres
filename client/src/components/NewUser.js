@@ -17,14 +17,13 @@ class NewUser extends Component {
     redirect: false,
     isSearchingImage: false,
     previewImage: null,
-    searchStyle: "cartoon", // Added to track avatar style
+    searchStyle: "cartoon",
   };
 
   fetchAvatarImage = async (name) => {
     try {
       this.setState({ isSearchingImage: true });
 
-      // Different style queries
       const styleQueries = {
         cartoon: `cartoon avatar illustration profile picture icon flat design character ${name}`,
         minimal: `minimal avatar icon vector illustration flat design ${name}`,
@@ -71,6 +70,7 @@ class NewUser extends Component {
 
   handleChange = async (event) => {
     const { name, value } = event.target;
+
     this.setState((prevState) => ({
       newUser: {
         ...prevState.newUser,
@@ -78,21 +78,39 @@ class NewUser extends Component {
       },
     }));
 
-    if (
-      (name === "firstName" || name === "lastName") &&
-      !this.state.newUser.photoUrl &&
-      this.state.newUser.firstName &&
-      this.state.newUser.lastName
-    ) {
-      const fullName = `${this.state.newUser.firstName} ${this.state.newUser.lastName}`;
-      await this.fetchAvatarImage(fullName);
+    if (name === "firstName" || name === "lastName") {
+      const updatedFirstName =
+        name === "firstName" ? value : this.state.newUser.firstName;
+      const updatedLastName =
+        name === "lastName" ? value : this.state.newUser.lastName;
+
+      if (!updatedFirstName || !updatedLastName) {
+        this.setState({
+          previewImage: null,
+          newUser: {
+            ...this.state.newUser,
+            photoUrl: "",
+            [name]: value,
+          },
+        });
+        return;
+      }
+
+      if (updatedFirstName && updatedLastName) {
+        const fullName = `${updatedFirstName} ${updatedLastName}`;
+        await this.fetchAvatarImage(fullName);
+      }
     }
   };
 
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (!this.state.newUser.photoUrl.trim()) {
+      if (
+        !this.state.newUser.photoUrl.trim() &&
+        this.state.newUser.firstName &&
+        this.state.newUser.lastName
+      ) {
         const fullName = `${this.state.newUser.firstName} ${this.state.newUser.lastName}`;
         const imageUrl = await this.fetchAvatarImage(fullName);
         if (imageUrl) {
@@ -179,18 +197,21 @@ class NewUser extends Component {
                   <StyleButton
                     active={this.state.searchStyle === "cartoon"}
                     onClick={() => this.handleStyleChange("cartoon")}
+                    type="button"
                   >
                     Cartoon
                   </StyleButton>
                   <StyleButton
                     active={this.state.searchStyle === "minimal"}
                     onClick={() => this.handleStyleChange("minimal")}
+                    type="button"
                   >
                     Minimal
                   </StyleButton>
                   <StyleButton
                     active={this.state.searchStyle === "anime"}
                     onClick={() => this.handleStyleChange("anime")}
+                    type="button"
                   >
                     Anime
                   </StyleButton>
@@ -209,78 +230,80 @@ class NewUser extends Component {
     );
   }
 }
-
-// ... existing styled components ...
-
-const StyleButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-`;
-
-const StyleButton = styled.button`
-  padding: 8px 15px;
-  border: none;
-  border-radius: 20px;
-  background: ${(props) => (props.active ? "#74942c" : "#999")};
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
-
-  &:hover {
-    transform: translateY(-1px);
-    background: ${(props) => (props.active ? "#8ab435" : "#888")};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-`;
-
 const UserFormContainer = styled.div`
   min-height: 100vh;
-  background: rgb(255, 247, 230);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 20px;
 
   nav {
-    display: block;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 
     a {
-      font-family: "Lato", sans-serif;
       font-family: "Playfair Display", serif;
-      font-weight: 300;
       text-decoration: none;
-      color: black;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 20px;
-      padding: 30px;
-      z-index: auto;
+      padding: 15px 30px;
+      transition: all 0.3s ease;
+      position: relative;
 
       &:hover {
-        text-shadow: none;
-        text-shadow: 2px 2px 2px silver;
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 10px;
+        left: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      &:hover::after {
+        width: calc(100% - 60px);
       }
     }
   }
 
   h1 {
     text-align: center;
-    color: #333;
+    color: white;
     font-family: "Special Elite", cursive;
     font-size: 2.5em;
     margin-bottom: 40px;
     padding-top: 50px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: glow 3s infinite;
+
+    @keyframes glow {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+    }
   }
 `;
 
 const FormCard = styled.div`
   max-width: 400px;
   margin: 0 auto;
-  background: #b39b86;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
   form {
     display: flex;
@@ -293,33 +316,35 @@ const InputGroup = styled.div`
   input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
     transition: all 0.2s ease;
     outline: none;
     box-sizing: border-box;
 
     &:focus {
       border-color: rgba(255, 255, 255, 0.5);
-      background: white;
+      background: rgba(255, 255, 255, 0.15);
     }
 
     &::placeholder {
-      color: #666;
+      color: rgba(255, 255, 255, 0.6);
     }
   }
 `;
 
 const PreviewContainer = styled.div`
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
 
   h4 {
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-family: "Special Elite", cursive;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   img {
@@ -327,7 +352,38 @@ const PreviewContainer = styled.div`
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid white;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const StyleButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+`;
+
+const StyleButton = styled.button`
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  background: ${(props) =>
+    props.active ? "#74942c" : "rgba(255, 255, 255, 0.1)"};
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: ${(props) =>
+      props.active ? "#8ab435" : "rgba(255, 255, 255, 0.2)"};
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 `;
 
@@ -340,18 +396,42 @@ const SubmitButton = styled.button`
   font-size: 16px;
   font-weight: 500;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   width: 100%;
-  margin-top: 5px;
+  margin-top: 15px;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+  position: relative;
+  overflow: hidden;
 
   &:hover {
     background: ${(props) => (props.disabled ? "#74942c" : "#8ab435")};
-    transform: ${(props) => (props.disabled ? "none" : "translateY(-1px)")};
+    transform: ${(props) => (props.disabled ? "none" : "translateY(-2px)")};
+    box-shadow: ${(props) =>
+      props.disabled ? "none" : "0 5px 15px rgba(116, 148, 44, 0.3)"};
   }
 
   &:active {
     transform: ${(props) => (props.disabled ? "none" : "translateY(1px)")};
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: transform 0.5s ease;
+  }
+
+  &:hover::after {
+    transform: translateX(200%);
   }
 `;
 

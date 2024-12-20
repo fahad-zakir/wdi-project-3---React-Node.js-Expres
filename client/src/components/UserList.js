@@ -23,11 +23,11 @@ class UserList extends Component {
 
     return (
       <UserIdContainer>
-        <div className="NavButtons">
-          <Link to="/">Home</Link>
-          <Link to="/new">Create User</Link>
-        </div>
-        <h1>Choose User</h1>
+        <NavButtons>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/new">Create User</StyledLink>
+        </NavButtons>
+        <Title>Choose User</Title>
         <List>{userList}</List>
       </UserIdContainer>
     );
@@ -42,38 +42,71 @@ const List = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
+  gap: 20px;
+  padding: 0 20px;
 `;
 
 const UserIdContainer = styled.div`
   min-height: 100vh;
-  background: rgb(255, 247, 230);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 20px 0;
+`;
 
-  h1 {
-    font-family: "Special Elite", cursive, bold;
-    padding-top: 50px;
-    color: Black;
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
+const Title = styled.h1`
+  font-family: "Special Elite", cursive;
+  padding-top: 50px;
+  color: white;
+  font-size: 50px;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+
+  animation: glow 3s infinite;
+
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+`;
+
+const NavButtons = styled.nav`
+  display: block;
+  padding: 20px;
+`;
+
+const StyledLink = styled(Link)`
+  font-family: "Playfair Display", serif;
+  font-weight: 300;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+  padding: 30px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
-  .NavButtons {
-    display: block;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 25px;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
 
-    a {
-      font-family: "Lato", sans-serif;
-      font-family: "Playfair Display", serif;
-      font-weight: 300;
-      text-decoration: none;
-      color: black;
-      font-size: 20px;
-      padding: 30px;
-      z-index: auto;
-
-      &:hover {
-        text-shadow: none;
-        text-shadow: 2px 2px 2px silver;
-      }
-    }
+  &:hover::after {
+    width: calc(100% - 60px);
   }
 `;

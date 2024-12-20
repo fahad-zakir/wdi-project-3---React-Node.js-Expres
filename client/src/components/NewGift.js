@@ -161,46 +161,74 @@ class NewGift extends Component {
   }
 }
 
-export default NewGift;
-
 const GiftFormContainer = styled.div`
   min-height: 100vh;
-  background: rgb(255, 247, 230);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   padding: 20px;
 
   nav {
     display: flex;
+    justify-content: center;
     gap: 20px;
-    margin-bottom: 20px;
+    padding: 20px;
 
     a {
+      font-family: "Playfair Display", serif;
       text-decoration: none;
-      color: #333;
-      font-size: 18px;
-      font-family: "Special Elite", cursive;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 20px;
+      padding: 15px 30px;
+      transition: all 0.3s ease;
+      position: relative;
 
       &:hover {
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 10px;
+        left: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      &:hover::after {
+        width: calc(100% - 60px);
       }
     }
   }
 
   h1 {
     text-align: center;
-    color: #333;
+    color: white;
     font-family: "Special Elite", cursive;
     font-size: 2.5em;
-    margin-bottom: 20px;
+    margin: 20px 0 40px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: glow 3s infinite;
+
+    @keyframes glow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
   }
 `;
 
 const FormCard = styled.div`
   max-width: 400px;
   margin: 0 auto;
-  background: #b39b86;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
   form {
     display: flex;
@@ -213,63 +241,95 @@ const InputGroup = styled.div`
   input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
     transition: all 0.2s ease;
     outline: none;
     box-sizing: border-box;
 
     &:focus {
       border-color: rgba(255, 255, 255, 0.5);
-      background: white;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
     }
 
     &::placeholder {
-      color: #666;
+      color: rgba(255, 255, 255, 0.6);
     }
   }
 `;
 
 const PreviewContainer = styled.div`
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 
   h4 {
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-family: "Special Elite", cursive;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   img {
     max-width: 100%;
     max-height: 200px;
     border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const SubmitButton = styled.button`
-  background: #ff9800;
+  background: rgba(116, 148, 44, 0.9);
   color: white;
   border: none;
   padding: 12px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 500;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  transition: all 0.2s ease;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  transition: all 0.3s ease;
   width: 100%;
-  margin-top: 5px;
-  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+  margin-top: 15px;
+  opacity: ${props => props.disabled ? 0.7 : 1};
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    background: ${(props) => (props.disabled ? "#ff9800" : "#f57c00")};
-    transform: ${(props) => (props.disabled ? "none" : "translateY(-1px)")};
+    background: ${props => props.disabled ? 'rgba(116, 148, 44, 0.9)' : '#8ab435'};
+    transform: ${props => props.disabled ? 'none' : 'translateY(-2px)'};
+    box-shadow: ${props => props.disabled ? 'none' : '0 5px 15px rgba(138, 180, 53, 0.3)'};
   }
 
   &:active {
-    transform: ${(props) => (props.disabled ? "none" : "translateY(1px)")};
+    transform: ${props => props.disabled ? 'none' : 'translateY(1px)'};
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: transform 0.5s ease;
+  }
+
+  &:hover::after {
+    transform: translateX(200%);
   }
 `;
+
+export default NewGift;

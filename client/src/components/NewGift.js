@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Redirect, Link } from "react-router-dom";
 
-const GOOGLE_API_KEY = "AIzaSyBOGUTwZ_QGxYJ4G3ylAJCKWeBDhWnhx4g";
-const SEARCH_ENGINE_ID = "c61d59ea9fae040ad";
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+const SEARCH_ENGINE_ID = process.env.REACT_APP_SEARCH_ENGINE_ID;
 
 class NewGift extends Component {
   state = {

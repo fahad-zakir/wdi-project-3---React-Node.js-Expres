@@ -1,213 +1,296 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
 
-class UserEditDelete extends Component {
+class EditGift extends Component {
   state = {
-    user: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      photoUrl: "",
-      redirect: false,
-      isStateNotSet: true,
+    gift: {
+      giftName: "",
+      for: "",
+      price: "",
+      giftPhotoUrl: "",
     },
-    userID: "",
-  };
-  handleChange = (event) => {
-    const updateUser = {
-      ...this.state.user,
-    };
-    updateUser[event.target.name] = event.target.value;
-    this.setState({ user: updateUser });
+    redirect: false,
+    isLoading: true,
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.updateUser(this.state.user);
-    this.updateCurrentState();
-    this.props.UserDataBase();
-    this.setState({ redirect: true });
-  };
-
-  handleDelete = () => {
-    console.log("about to delete a user from the app.js");
-    this.props.deleteUser(this.state.user);
-  };
-
-  updateCurrentState = () => {
-    axios
-      .get(`/users/${this.props.match.params.userId}`, this.state.user)
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          user: response.data,
-          isStateNotSet: false,
-          userID: this.props.match.params.userId,
+  componentDidMount() {
+    const { userId, giftId } = this.props.match.params;
+    const user = this.props.users.find(u => u._id === userId);
+    if (user) {
+      const gift = user.gifts.find(g => g._id === giftId);
+      if (gift) {
+        this.setState({ 
+          gift: { ...gift },
+          isLoading: false 
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  componentWillMount() {
-    this.updateCurrentState();
+      }
+    }
   }
 
-  render() {
-    if (this.state.redirect === true) {
-      return <Redirect to="/users" />;
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState(prevState => ({
+      gift: {
+        ...prevState.gift,
+        [name]: value,
+      },
+    }));
+  };
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { userId, giftId } = this.props.match.params;
+      await this.props.updateGift(userId, giftId, this.state.gift);
+      this.setState({ redirect: true });
+    } catch (error) {
+      console.error("Failed to update gift:", error);
     }
-    return this.state.isStateNotSet ? (
-      <div></div>
-    ) : (
-      <Container>
-        <h2>Update User</h2>
+  };
 
-        <FormContainer>
+  handleDelete = async () => {
+    try {
+      const { userId, giftId } = this.props.match.params;
+      await this.props.deleteGift(userId, giftId);
+      this.setState({ redirect: true });
+    } catch (error) {
+      console.error("Failed to delete gift:", error);
+    }
+  };
+
+  render() {
+    if (this.state.redirect) {
+      return <Redirect to={`/user/${this.props.match.params.userId}/gifts`} />;
+    }
+
+    if (this.state.isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <GiftFormContainer>
+        <NavBar>
+          <Link to="/">Home</Link>
+          <Link to="/users">Back to Users</Link>
+          <Link to={`/user/${this.props.match.params.userId}/gifts`}>Back to Gifts</Link>
+        </NavBar>
+
+        <Title>Update Gift</Title>
+
+        <FormCard>
           <form onSubmit={this.handleSubmit}>
-            <div>
+            <InputGroup>
               <input
                 onChange={this.handleChange}
-                name="firstName"
-                placeholder="first name"
+                name="giftName"
+                placeholder="Gift Name"
                 type="text"
-                value={this.state.user.firstName}
+                value={this.state.gift.giftName}
+                required
               />
-            </div>
-            <div>
-              <input
-                onChange={this.handleChange}
-                name="lastName"
-                placeholder="last name"
-                type="text"
-                value={this.state.user.lastName}
-              />
-            </div>
-            <div>
-              <input
-                onChange={this.handleChange}
-                name="email"
-                placeholder="email"
-                type="text"
-                value={this.state.user.email}
-              />
-            </div>
-            <div>
-              <input
-                onChange={this.handleChange}
-                name="photoUrl"
-                placeholder="photo"
-                type="text"
-                value={this.state.user.photoUrl}
-              />
-            </div>
-            <button className="button" type="submit">
-              Submit
-            </button>
-            <button className="button-2" onClick={this.handleDelete}>
-              Delete
-            </button>
-          </form>
+            </InputGroup>
 
-          <div className="link-div">
-            <div className="gift-link">
-              <Link to={`/user/${this.state.userID}/gifts/new`}>New Gift</Link>
-            </div>
-            <div className="users-link">
-              <a href="/users">Back To Users</a>
-            </div>
-          </div>
-        </FormContainer>
-      </Container>
+            <InputGroup>
+              <input
+                onChange={this.handleChange}
+                name="for"
+                placeholder="For"
+                type="text"
+                value={this.state.gift.for}
+                required
+              />
+            </InputGroup>
+
+            <InputGroup>
+              <input
+                onChange={this.handleChange}
+                name="price"
+                placeholder="Price"
+                type="number"
+                value={this.state.gift.price}
+                required
+              />
+            </InputGroup>
+
+            <InputGroup>
+              <input
+                onChange={this.handleChange}
+                name="giftPhotoUrl"
+                placeholder="Photo URL"
+                type="text"
+                value={this.state.gift.giftPhotoUrl}
+              />
+            </InputGroup>
+
+            {this.state.gift.giftPhotoUrl && (
+              <PreviewContainer>
+                <h4>Current Image:</h4>
+                <img src={this.state.gift.giftPhotoUrl} alt="Gift preview" />
+              </PreviewContainer>
+            )}
+
+            <ButtonGroup>
+              <SubmitButton type="submit">
+                Update Gift
+              </SubmitButton>
+              <DeleteButton type="button" onClick={this.handleDelete}>
+                Delete Gift
+              </DeleteButton>
+            </ButtonGroup>
+          </form>
+        </FormCard>
+      </GiftFormContainer>
     );
   }
 }
 
-export default UserEditDelete;
+export default EditGift;
 
-const Container = styled.div`
+const GiftFormContainer = styled.div`
+  min-height: 100vh;
+  background: rgb(255, 247, 230);
+  padding: 20px;
+`;
 
-    display: flex;
-    flex-direction: column;
-    background: rgb(244,226,156);
-    background: -moz-linear-gradient(-45deg, rgba(244,226,156,0) 0%, rgba(59,41,58,1) 100%), -moz-linear-gradient(left, rgba(244,226,156,1) 0%, rgba(130,96,87,1) 100%);
-    background: -webkit-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -webkit-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-    background: -o-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -o-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-    background: -ms-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -ms-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-    background: linear-gradient(135deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), linear-gradient(to right, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-    justify-content: 
-    margin: 10px;
-    padding: 20px;
-    color: white;
-    font-size: 2vh;
-    text-shadow: 1px 1px 0px black;
-    `;
-
-const FormContainer = styled.div`
-  margin-top: 50px;
-  font-family: "Lato", sans-serif;
-  font-family: "Playfair Display", serif;
-  font-weight: 300;
+const NavBar = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  h1 {
-    font-family: "Special Elite", cursive, bold;
-    padding-top: 50px;
-  }
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+
   a {
     text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    background: #74942c;
     color: white;
-    font-size: 25px;
-    z-index: auto;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    border: none;
+
     &:hover {
-      text-shadow: none;
-      text-shadow: 2px 2px 2px #000000;
+      background: #8ab435;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  color: #333;
+  font-family: 'Special Elite', cursive;
+  font-size: 2.5em;
+  margin: 20px 0 40px;
+`;
+
+const FormCard = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  background: #b39b86;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
   form {
-    border: 5px solid rgba(0, 0, 0, 0.3);
-    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    gap: 15px;
+  }
+`;
+
+const InputGroup = styled.div`
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
+    outline: none;
     box-sizing: border-box;
-    background-color: #d3d3d3;
-    width: 300px;
-    min-width: 200px;
-    margin-top: 50px;
-    height: 320px;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    transition: all 0.25s ease;
+
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: white;
+    }
+
+    &::placeholder {
+      color: #666;
+    }
   }
-  .button {
-    border: 1px solid black;
-    max-width: 250px;
-    min-width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    transition: all 0.25s ease;
-    background: #74942c;
+`;
+
+const PreviewContainer = styled.div`
+  text-align: center;
+  margin-top: 10px;
+
+  h4 {
+    color: white;
+    margin-bottom: 10px;
+    font-family: "Special Elite", cursive;
   }
-  .button-2 {
-    border: 1px solid black;
-    max-width: 250px;
-    min-width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    transition: all 0.25s ease;
-    background: red;
+
+  img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+const SubmitButton = styled.button`
+  flex: 1;
+  background: #74942c;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #8ab435;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
+
+const DeleteButton = styled.button`
+  flex: 1;
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 `;

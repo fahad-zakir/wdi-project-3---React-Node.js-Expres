@@ -1,167 +1,275 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import axios from "axios";
-import { Redirect, Link } from 'react-router-dom'
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Redirect, Link } from "react-router-dom";
 
+const GOOGLE_API_KEY = "AIzaSyBOGUTwZ_QGxYJ4G3ylAJCKWeBDhWnhx4g";
+const SEARCH_ENGINE_ID = "c61d59ea9fae040ad";
 
 class NewGift extends Component {
   state = {
-    newGift: [],
+    newGift: {
+      giftName: "",
+      for: "",
+      price: "",
+      giftPhotoUrl: "",
+    },
     redirect: false,
-    id: null
+    error: null,
+    isSearchingImage: false,
+    previewImage: null,
   };
 
-  //this is a function that handles the changes the user makes
-  handleChange = (event) => {
-    //after user fill's out the form, the information needs to be stored in a variable
-    const attribute = event.target.name;
-    let val = event.target.value;
-    // update the new information
-    // and add it to
-    const newGift = { ...this.state.newGift };
-    newGift[attribute] = val;
-    this.setState({ newGift });
+  fetchImageForGift = async (giftName) => {
+    try {
+      this.setState({ isSearchingImage: true });
+
+      const response = await fetch(
+        `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${SEARCH_ENGINE_ID}&q=${encodeURIComponent(
+          giftName
+        )}&searchType=image&num=1`
+      );
+
+      const data = await response.json();
+
+      if (data.items && data.items.length > 0) {
+        const imageUrl = data.items[0].link;
+        this.setState({ previewImage: imageUrl });
+        return imageUrl;
+      }
+      return null;
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return null;
+    } finally {
+      this.setState({ isSearchingImage: false });
+    }
   };
 
-  updateCurrentState = () => {
-    axios
-      .get(`/users/${this.props.match.params.userId}`, this.state.user)
-      .then((response) => {
-        console.log(response.data._id);
-        this.setState({ id: response.data._id})
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-// this.props.match.params.userId
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.createGift(this.state.newGift);
-    this.setState({ redirect: true });
+    try {
+      const userId = this.props.match.params.userId;
+      let giftData = { ...this.state.newGift };
+
+      // If no photo URL is provided, use the preview image or search for one
+      if (!giftData.giftPhotoUrl.trim()) {
+        const imageUrl =
+          this.state.previewImage ||
+          (await this.fetchImageForGift(giftData.giftName));
+        if (imageUrl) {
+          giftData.giftPhotoUrl = imageUrl;
+        }
+      }
+
+      await this.props.createGift(userId, giftData);
+      this.setState({ redirect: true });
+    } catch (error) {
+      this.setState({ error: "Failed to create gift" });
+    }
   };
 
-  componentWillMount() {
-    this.updateCurrentState();
-  }
+  handleChange = async (event) => {
+    const { name, value } = event.target;
+    this.setState((prevState) => ({
+      newGift: {
+        ...prevState.newGift,
+        [name]: value,
+      },
+    }));
+
+    // If gift name changes and no photo URL is set, search for an image
+    if (name === "giftName" && value && !this.state.newGift.giftPhotoUrl) {
+      await this.fetchImageForGift(value);
+    }
+  };
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="./gifts" />;
+      return <Redirect to={`/user/${this.props.match.params.userId}/gifts`} />;
     }
 
     return (
-      <NewUserContainer>
-        <div className="NavButtons">
+      <GiftFormContainer>
+        <nav>
           <Link to="/">Home</Link>
           <Link to="/users">Users</Link>
-        </div>
-        <div className="custom-gift-text">
-          <h2 className="new-gift">Add New Gift</h2>
-        </div>
-        <div className="form-custom">
+        </nav>
+
+        <h1>Add New Gift</h1>
+
+        <FormCard>
           <form onSubmit={this.handleSubmit}>
-            <div>
+            <InputGroup>
               <input
                 onChange={this.handleChange}
                 name="giftName"
-                placeholder="gift name"
+                placeholder="Gift Name"
                 type="text"
                 required
                 value={this.state.newGift.giftName}
               />
-            </div>
-            <div>
+            </InputGroup>
+
+            <InputGroup>
               <input
                 onChange={this.handleChange}
                 name="for"
                 placeholder="For"
                 type="text"
+                required
                 value={this.state.newGift.for}
               />
-            </div>
-            <div>
+            </InputGroup>
+
+            <InputGroup>
               <input
                 onChange={this.handleChange}
                 name="price"
-                placeholder="price"
+                placeholder="Price"
                 type="number"
+                required
                 value={this.state.newGift.price}
               />
-            </div>
-            <div>
+            </InputGroup>
+
+            <InputGroup>
               <input
                 onChange={this.handleChange}
                 name="giftPhotoUrl"
-                placeholder="photo"
+                placeholder="Photo URL (optional - will auto-search if empty)"
                 type="text"
                 value={this.state.newGift.giftPhotoUrl}
               />
-            </div>
-            <button className="button" type="submit">
-              Submit
-            </button>
+            </InputGroup>
+
+            {this.state.previewImage && (
+              <PreviewContainer>
+                <h4>Preview Image:</h4>
+                <img src={this.state.previewImage} alt="Preview" />
+              </PreviewContainer>
+            )}
+
+            <SubmitButton type="submit" disabled={this.state.isSearchingImage}>
+              {this.state.isSearchingImage
+                ? "Searching for image..."
+                : "Add Gift"}
+            </SubmitButton>
           </form>
-        </div>
-      </NewUserContainer>
+        </FormCard>
+      </GiftFormContainer>
     );
   }
 }
 
-export default NewGift
+export default NewGift;
 
-const NewUserContainer = styled.div`
-width:100vw;
-min-height:100vh;
-background-image: linear-gradient(45deg, rgba(194, 233, 221, 0.5) 1%, rgba(104, 119, 132, 0.5) 100%), linear-gradient(-45deg, #494d71 0%, rgba(217, 230, 185, 0.5) 80%);
--webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-}
+const GiftFormContainer = styled.div`
+  min-height: 100vh;
+  background: rgb(255, 247, 230);
+  padding: 20px;
 
-form {
-margin-top: 200px;
-  border: 5px solid rgba(0,0,0, 0.3);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: #D3D3D3;
-  width: 300px;
-  min-width: 200px;
-  height: 320px;
-  font-weight: bold;
-  color: black;
+  nav {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-family: "Special Elite", cursive;
+
+      &:hover {
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    font-family: "Special Elite", cursive;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+`;
+
+const FormCard = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  background: #b39b86;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+const InputGroup = styled.div`
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: white;
+    }
+
+    &::placeholder {
+      color: #666;
+    }
+  }
+`;
+
+const PreviewContainer = styled.div`
   text-align: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  transition: all 0.25s ease;
-}
- .button {
-  border: 1px solid black;
-  max-width: 250px;
-  min-width: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  transition: all 0.25s ease;
-  background: #74942c;
-}
-.NavButtons {
-display:block;
-  a{
-    font-family: 'Lato', sans-serif;
-    font-family: 'Playfair Display', serif;
-    font-weight: 300;
-  text-decoration: none;
-    color: black;
-    font-size: 20px;
-    padding: 30px;
-    z-index: auto;
-    &:hover {
-    text-shadow: none;
-    text-shadow:2px 2px 2px silver;
-}
+  margin-top: 10px;
+
+  h4 {
+    color: white;
+    margin-bottom: 10px;
+    font-family: "Special Elite", cursive;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+`;
+
+const SubmitButton = styled.button`
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: 5px;
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+
+  &:hover {
+    background: ${(props) => (props.disabled ? "#ff9800" : "#f57c00")};
+    transform: ${(props) => (props.disabled ? "none" : "translateY(-1px)")};
+  }
+
+  &:active {
+    transform: ${(props) => (props.disabled ? "none" : "translateY(1px)")};
+  }
 `;

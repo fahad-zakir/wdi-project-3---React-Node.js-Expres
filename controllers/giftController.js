@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.json("caught error");
+      res.json("caught errored");
     });
 });
 

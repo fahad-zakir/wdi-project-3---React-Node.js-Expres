@@ -5,9 +5,7 @@ import Users from "./Users";
 
 class UserList extends Component {
   render() {
-    // What returns the multiple cards of users is the loop
     const userList = this.props.MyUsers.map((user, index) => {
-      console.log(user)
       return (
         <Users
           key={index}
@@ -18,12 +16,13 @@ class UserList extends Component {
           photoUrl={user.photoUrl}
           id={user._id}
           gift={user.gifts}
+          deleteUser={this.props.deleteUser}
         />
       );
     });
 
     return (
-      <UserIdContainer style={{ height: "100%", width: "100%" }}>
+      <UserIdContainer>
         <div className="NavButtons">
           <Link to="/">Home</Link>
           <Link to="/new">Create User</Link>
@@ -34,7 +33,9 @@ class UserList extends Component {
     );
   }
 }
+
 export default UserList;
+
 const List = styled.section`
   margin-top: 50px;
   display: flex;
@@ -42,32 +43,37 @@ const List = styled.section`
   justify-content: center;
   align-items: stretch;
 `;
+
 const UserIdContainer = styled.div`
-min-height: 100vh;
- background: rgb(255,247,230);
+  min-height: 100vh;
+  background: rgb(255, 247, 230);
 
-h1 {
-    font-family: 'Special Elite', cursive, bold;
+  h1 {
+    font-family: "Special Elite", cursive, bold;
     padding-top: 50px;
-    color:Black bold;
+    color: Black;
     font-size: 50px;
-    display:flex;
+    display: flex;
     justify-content: center;
-}  
-.NavButtons {
-display:block;
-  a{
-    font-family: 'Lato', sans-serif;
-    font-family: 'Playfair Display', serif;
-    font-weight: 300;
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
-    padding: 30px;
-    z-index: auto;
-    &:hover {
-    text-shadow: none;
-    text-shadow:2px 2px 2px silver;
-}
+  }
 
+  .NavButtons {
+    display: block;
+
+    a {
+      font-family: "Lato", sans-serif;
+      font-family: "Playfair Display", serif;
+      font-weight: 300;
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+      padding: 30px;
+      z-index: auto;
+
+      &:hover {
+        text-shadow: none;
+        text-shadow: 2px 2px 2px silver;
+      }
+    }
+  }
 `;

@@ -1,81 +1,139 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Gifts from './Gifts';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Gifts from "./Gifts";
 
 class GiftList extends Component {
+  state = {
+    gifts: [],
+    loading: true,
+    error: null,
+    user: null,
+  };
 
+  async componentDidMount() {
+    try {
+      const userId = this.props.match.params.userId;
+      const user = this.props.users.find((u) => u._id === userId);
+
+      if (user) {
+        this.setState({
+          gifts: user.gifts || [],
+          user,
+          loading: false,
+        });
+      } else {
+        this.setState({
+          error: "User not found",
+          loading: false,
+        });
+      }
+    } catch (error) {
+      console.error("Error loading gifts:", error);
+      this.setState({
+        error: "Failed to load gifts",
+        loading: false,
+      });
+    }
+  }
 
   render() {
-    // What returns the multiple cards of users is the loop
-    const giftList = this.props.MyGifts.map((gift, index) => {
-      console.log(this.props.MyGifts);
-      return (
-      
-        <Gifts
-          key={index}
-          firstName={gift.firstName}
-          lastName={gift.lastName}
-          photoUrl={gift.giftPhotoUrl}
-          giftName={gift.giftName}
-          for={gift.for}
-          price={gift.price}
-          userID={gift.userID}
-          id={gift._id}
-        />
-      );
-    });
+    const { gifts, loading, error, user } = this.state;
+
+    if (loading) return <div>Loading gifts...</div>;
+    if (error) return <div>Error: {error}</div>;
+    if (!user) return <div>User not found</div>;
+
     return (
-      <GiftContainer style={{ height: "100%", width: "100%" }}>
-        <div className="NavButtons">
+      <GiftContainer>
+        <NavBar>
           <Link to="/">Home</Link>
-          <Link to="./new">Create Gift</Link>
-          <h1 className="users-list">Gifts List</h1>
-        </div>
-        <div>
-          <List>
-            {giftList}
-          </List>
-        </div>
+          <Link to="/users">Back to Users</Link>
+          <Link to={`/user/${user._id}/new`}>Create Gift</Link>
+        </NavBar>
+        <Title>{user.firstName}'s Gifts</Title>
+        <List>
+          {gifts && gifts.length > 0 ? (
+            gifts.map((gift) => (
+              <Gifts
+                key={gift._id}
+                giftName={gift.giftName}
+                for={gift.for}
+                price={gift.price}
+                photoUrl={gift.giftPhotoUrl}
+                id={gift._id}
+                userId={user._id}
+              />
+            ))
+          ) : (
+            <EmptyMessage>
+              No gifts found. Click "Create Gift" to add one!
+            </EmptyMessage>
+          )}
+        </List>
       </GiftContainer>
     );
   }
 }
-export default GiftList
+
+export default GiftList;
+
+const GiftContainer = styled.div`
+  min-height: 100vh;
+  background: rgb(255, 247, 230);
+  padding: 20px;
+`;
+
+const NavBar = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  a {
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    background: #74942c;
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    border: none;
+
+    &:hover {
+      background: #8ab435;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  color: #333;
+  font-family: "Special Elite", cursive;
+  font-size: 2.5em;
+  margin: 20px 0 40px;
+`;
 
 const List = styled.section`
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
-const GiftContainer = styled.div`
-min-height: 100vh;
- background: rgb(255,247,230);
 
-h1 {
-    font-family: 'Special Elite', cursive, bold;
-    padding-top: 50px;
-    color:Black bold;
-    font-size: 50px;
-    display:flex;
-    justify-content: center;
-}  
-.NavButtons {
-display:block;
-  a{
-    font-family: 'Lato', sans-serif;
-    font-family: 'Playfair Display', serif;
-    font-weight: 300;
-  text-decoration: none;
-    color: black;
-    font-size: 20px;
-    padding: 30px;
-    z-index: auto;
-    &:hover {
-    text-shadow: none;
-    text-shadow:2px 2px 2px silver;
-  
-}}
-`
+const EmptyMessage = styled.div`
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  padding: 40px;
+  grid-column: 1 / -1;
+  font-family: "Special Elite", cursive;
+`;
